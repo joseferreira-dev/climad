@@ -1,12 +1,11 @@
-# Ficheiro core/views.py atualizado
-
 import requests
 import pandas as pd
 from django.shortcuts import render
 
 def index(request):
     """
-    Esta view busca dados da API da NASA POWER e exibe-os numa tabela.
+    Esta view busca dados da API da NASA POWER com base nas seleções
+    do utilizador e exibe os resultados numa tabela interativa.
     """
     context = {}
     if request.method == "POST":
@@ -14,29 +13,35 @@ def index(request):
         longitude = request.POST.get("longitude")
         start_date_raw = request.POST.get("start_date")
         end_date_raw = request.POST.get("end_date")
+        # Coleta a lista de parâmetros selecionados
+        selected_parameters = request.POST.getlist("parameters")
+
+        if not selected_parameters:
+            context["error"] = "Por favor, selecione pelo menos uma variável climática."
+            return render(request, "core/index.html", context)
 
         if start_date_raw > end_date_raw:
-            context["error"] = "A data de início não pode ser posterior à data de fim. Por favor, corrija as datas."
+            context["error"] = "A data de início não pode ser posterior à data de fim."
             return render(request, "core/index.html", context)
 
         if latitude and longitude and start_date_raw and end_date_raw:
             start_date_api = start_date_raw.replace("-", "")
             end_date_api = end_date_raw.replace("-", "")
 
-            context["latitude"] = latitude
-            context["longitude"] = longitude
-            context["start_date"] = start_date_raw
-            context["end_date"] = end_date_raw
+            context.update({
+                "latitude": latitude, "longitude": longitude,
+                "start_date": start_date_raw, "end_date": end_date_raw
+            })
 
+            # Junta os parâmetros selecionados numa string separada por vírgulas
+            parameters_string = ",".join(selected_parameters)
+            
             base_url = "https://power.larc.nasa.gov/api/temporal/daily/point"
             params = {
-                "parameters": "ALLSKY_SFC_SW_DWN,T2M,RH2M,WS10M,PRECTOT,PS",
-                "start": start_date_api,
-                "end": end_date_api,
-                "latitude": latitude,
-                "longitude": longitude,
-                "format": "JSON",
-                "community": "ag"
+                "parameters": parameters_string,
+                "start": start_date_api, "end": end_date_api,
+                "latitude": latitude, "longitude": longitude,
+                "format": "JSON", "community": "ag"
             }
 
             try:
@@ -47,18 +52,20 @@ def index(request):
                 df = pd.DataFrame(data["properties"]["parameter"])
 
                 if df.empty:
-                    raise KeyError("O DataFrame retornado pela API está vazio, sem dados para o período.")
+                    raise KeyError("O DataFrame retornado pela API está vazio.")
 
-                df.rename(columns={
+                # Dicionário com todos os nomes possíveis para renomear
+                rename_map = {
                     "ALLSKY_SFC_SW_DWN": "Radiação Solar (kWh/m²/dia)",
                     "T2M": "Temperatura (°C)",
                     "RH2M": "Umidade (%)",
                     "WS10M": "Vento (m/s)",
-                    "PRECTOTCORR": "Precipitação (mm/dia)",
+                    "PRECTOT": "Precipitação (mm/dia)",
+                    "PRECTOTCORR": "Precipitação (mm/dia)", # Adicionado para segurança
                     "PS": "Pressão (kPa)"
-                }, inplace=True)
+                }
+                df.rename(columns=rename_map, inplace=True)
                 
-                # Lógica simplificada: processa sempre para a tabela
                 df["Data"] = pd.to_datetime(df.index, format="%Y%m%d").strftime("%Y-%m-%d")
                 cols = ["Data"] + [col for col in df if col != "Data"]
                 df = df[cols]
@@ -69,6 +76,6 @@ def index(request):
             except requests.exceptions.RequestException as e:
                 context["error"] = f"Erro ao acessar a API da NASA: {e}"
             except KeyError:
-                 context["error"] = "Não foi possível encontrar dados para a localização/período fornecido. Verifique os dados."
+                 context["error"] = "Não foi possível encontrar dados para a seleção. Verifique os dados."
 
     return render(request, "core/index.html", context)

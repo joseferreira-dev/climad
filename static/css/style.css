@@ -1,54 +1,117 @@
-body {
-    font-family: sans-serif;
-    margin: 2em;
-    background-color: #f4f4f9;
-    color: #333;
-}
+/* static/css/style.css */
 
-h1,
-h2 {
-    color: #005a9c;
+/* Estilos Gerais */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f7f6;
+    color: #333;
+    padding: 1em;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 960px;
     margin: auto;
     background: white;
-    padding: 20px;
+    padding: 2em;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-form {
+h1 {
+    color: #005a9c;
     display: flex;
+    align-items: center;
     gap: 10px;
-    margin-bottom: 20px;
 }
 
-input[type="text"] {
+/* Layout Principal do Formulário */
+.climad-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em; /* Espaçamento entre as seções do formulário */
+}
+
+.form-section {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5em;
+}
+
+legend {
+    font-weight: bold;
+    color: #005a9c;
+    padding: 0 0.5em;
+}
+
+/* Grelha para os campos de texto e data */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1em;
+}
+
+/* Grelha para as checkboxes */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75em;
+}
+
+.checkbox-grid label {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    cursor: pointer;
+}
+
+/* Estilo dos Inputs */
+input[type="text"],
+input[type="date"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    flex: 1;
+    width: 100%;
+    box-sizing: border-box; /* Garante que o padding não aumente a largura total */
 }
 
-button {
-    padding: 10px 15px;
+/* Botão de Submissão */
+.submit-button {
+    padding: 12px 20px;
     background-color: #005a9c;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    align-self: flex-start; /* Alinha o botão ao início */
 }
 
-button:hover {
+.submit-button:hover {
     background-color: #004175;
 }
 
+/* Estilos da Tabela (mantidos e melhorados) */
 .results {
-    margin-top: 20px;
+    margin-top: 2em;
 }
 
-.error {
-    color: red;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+}
+
+th, td {
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
 }

@@ -6,20 +6,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Climad - Análise Climática</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
 </head>
 <body>
     <div class="container">
         <h1>Climad 🌦️</h1>
-        <p>Insira a localização e o período para consultar os dados climáticos.</p>
+        <p>Selecione a localização, período e as variáveis climáticas desejadas.</p>
 
-        <form method="post">
+        <form method="post" class="climad-form">
             {% csrf_token %}
-            <input type="text" name="latitude" placeholder="Latitude (ex: -9.38)" required>
-            <input type="text" name="longitude" placeholder="Longitude (ex: -40.50)" required>
-            <input type="date" name="start_date" required title="Data de Início">
-            <input type="date" name="end_date" required title="Data de Fim">
-            <button type="submit">Buscar Dados</button>
+
+            <fieldset class="form-section">
+                <legend>Localização e Período</legend>
+                <div class="form-grid">
+                    <input type="text" name="latitude" placeholder="Latitude (ex: -9.38)" required>
+                    <input type="text" name="longitude" placeholder="Longitude (ex: -40.50)" required>
+                    <input type="date" name="start_date" required title="Data de Início">
+                    <input type="date" name="end_date" required title="Data de Fim">
+                </div>
+            </fieldset>
+            
+            <fieldset class="form-section">
+                <legend>Variáveis Climáticas</legend>
+                <div class="checkbox-grid">
+                    <label><input type="checkbox" name="parameters" value="ALLSKY_SFC_SW_DWN" checked> Radiação Solar</label>
+                    <label><input type="checkbox" name="parameters" value="T2M" checked> Temperatura</label>
+                    <label><input type="checkbox" name="parameters" value="RH2M"> Umidade</label>
+                    <label><input type="checkbox" name="parameters" value="WS10M"> Vento</label>
+                    <label><input type="checkbox" name="parameters" value="PRECTOT" checked> Precipitação</label>
+                    <label><input type="checkbox" name="parameters" value="PS"> Pressão</label>
+                </div>
+            </fieldset>
+
+            <button type="submit" class="submit-button">Buscar Dados</button>
         </form>
 
         {% if error %}
@@ -31,7 +51,7 @@
                 <h2>Resultados para Latitude: {{ latitude }}, Longitude: {{ longitude }}</h2>
                 <h3>Dados diários de {{ start_date }} a {{ end_date }}</h3>
                 <div style="overflow-x:auto;">
-                    <table border="1" style="width:100%; border-collapse: collapse;">
+                    <table id="climate-table" class="display" style="width:100%">
                         <thead>
                             <tr>
                                 {% for header in table_headers %}
@@ -54,6 +74,8 @@
         {% endif %}
     </div>
     
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
     <script src="{% static "js/main.js" %}"></script>
 </body>
 </html>
