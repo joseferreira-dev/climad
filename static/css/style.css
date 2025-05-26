@@ -46,14 +46,14 @@ legend {
 /* Grelha para os campos de texto e data */
 .form-grid {
     display: flex;
-    flex-direction: column; /* Empilha os pares verticalmente */
-    gap: 1em; /* Espaço entre os pares de inputs */
+    flex-direction: column; 
+    gap: 1em; 
 }
 
 .input-pair {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Cria duas colunas de tamanho igual */
-    gap: 1em; /* Espaço entre os dois inputs do par */
+    grid-template-columns: 1fr 1fr; 
+    gap: 1em; 
 }
 
 .form-group {
@@ -90,7 +90,7 @@ input[type="date"] {
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
-    box-sizing: border-box; /* Garante que o padding não aumente a largura total */
+    box-sizing: border-box; 
     font-size: 1em;
 }
 
@@ -105,7 +105,7 @@ input[type="date"] {
     font-size: 1.1em;
     font-weight: bold;
     transition: background-color 0.2s;
-    align-self: flex-start; /* Alinha o botão ao início */
+    align-self: flex-start; 
 }
 
 .submit-button:hover {
@@ -116,18 +116,18 @@ input[type="date"] {
 .form-error {
     margin-top: 1.5em;
     padding: 1em;
-    border: 1px solid #e57373; /* Borda vermelha clara */
-    background-color: #ffebee; /* Fundo vermelho muito claro */
-    color: #c62828; /* Texto vermelho escuro */
+    border: 1px solid #e57373;
+    background-color: #ffebee; 
+    color: #c62828; 
     border-radius: 8px;
     text-align: center;
 }
 
 /* Estilo para o mapa */
 #map {
-    height: 400px; /* Altura do mapa */
+    height: 400px; 
     width: 100%;
-    margin-bottom: 1em; /* Espaçamento abaixo do mapa */
+    margin-bottom: 1em; 
     border-radius: 8px;
     border: 1px solid #ddd;
 }
@@ -140,7 +140,7 @@ input[type="date"] {
 }
 
 #map-search-input {
-    flex-grow: 1; /* Faz o input ocupar o espaço disponível */
+    flex-grow: 1; 
 }
 
 #map-search-button {
@@ -155,7 +155,7 @@ input[type="date"] {
     background-color: #333;
 }
 
-/* Estilos da Tabela (mantidos e melhorados) */
+/* Estilos da Tabela */
 .results {
     margin-top: 2em;
 }

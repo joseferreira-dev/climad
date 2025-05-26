@@ -26,18 +26,16 @@
                 <div id="map"></div> 
 
                 <div class="form-grid">
-
                     <div class="input-pair">
                         <div class="form-group">
                             <label for="latitude-input">Latitude</label>
-                            <input type="text" id="latitude-input" name="latitude" placeholder="-9.389083" required>
+                            <input type="text" id="latitude-input" name="latitude" placeholder="-9.389083" value="{{ latitude|default_if_none:'' }}" required>
                         </div>
                         <div class="form-group">
                             <label for="longitude-input">Longitude</label>
-                            <input type="text" id="longitude-input" name="longitude" placeholder="-40.503620" required>
+                            <input type="text" id="longitude-input" name="longitude" placeholder="-40.503620" value="{{ longitude|default_if_none:'' }}" required>
                         </div>
                     </div>
-
                     <div class="input-pair">
                         <div class="form-group">
                             <label for="start-date-input">Data de Início</label>
@@ -48,19 +46,20 @@
                             <input type="date" id="end-date-input" name="end_date" required title="Data de Fim" value="{{ default_end_date }}">
                         </div>
                     </div>
-
                 </div>
             </fieldset>
             
             <fieldset class="form-section">
                 <legend>Variáveis Climáticas</legend>
                 <div class="checkbox-grid">
-                    <label><input type="checkbox" name="parameters" value="ALLSKY_SFC_SW_DWN" checked> Radiação Solar</label>
-                    <label><input type="checkbox" name="parameters" value="T2M" checked> Temperatura</label>
-                    <label><input type="checkbox" name="parameters" value="RH2M" checked> Umidade</label>
-                    <label><input type="checkbox" name="parameters" value="WS10M" checked> Vento</label>
-                    <label><input type="checkbox" name="parameters" value="PRECTOT" checked> Precipitação</label>
-                    <label><input type="checkbox" name="parameters" value="PS" checked> Pressão</label>
+                    {% with current_selected_params=form_selected_parameters %}
+                    <label><input type="checkbox" name="parameters" value="ALLSKY_SFC_SW_DWN" {% if "ALLSKY_SFC_SW_DWN" in current_selected_params %}checked{% endif %}> Radiação Solar</label>
+                    <label><input type="checkbox" name="parameters" value="T2M" {% if "T2M" in current_selected_params %}checked{% endif %}> Temperatura</label>
+                    <label><input type="checkbox" name="parameters" value="RH2M" {% if "RH2M" in current_selected_params %}checked{% endif %}> Umidade</label>
+                    <label><input type="checkbox" name="parameters" value="WS10M" {% if "WS10M" in current_selected_params %}checked{% endif %}> Vento</label>
+                    <label><input type="checkbox" name="parameters" value="PRECTOT" {% if "PRECTOT" in current_selected_params %}checked{% endif %}> Precipitação</label>
+                    <label><input type="checkbox" name="parameters" value="PS" {% if "PS" in current_selected_params %}checked{% endif %}> Pressão</label>
+                    {% endwith %}
                 </div>
             </fieldset>
 
@@ -97,7 +96,8 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+
+                </div>
         {% endif %}
     </div>
     
