@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 from django.shortcuts import render
+from django.conf import settings
 
 def index(request):
     """
@@ -8,12 +9,13 @@ def index(request):
     do utilizador e exibe os resultados numa tabela interativa.
     """
     context = {}
+    context["Maps_api_key"] = settings.MAPS_API_KEY
+
     if request.method == "POST":
         latitude = request.POST.get("latitude")
         longitude = request.POST.get("longitude")
         start_date_raw = request.POST.get("start_date")
         end_date_raw = request.POST.get("end_date")
-        # Coleta a lista de parâmetros selecionados
         selected_parameters = request.POST.getlist("parameters")
 
         if not selected_parameters:
@@ -33,7 +35,6 @@ def index(request):
                 "start_date": start_date_raw, "end_date": end_date_raw
             })
 
-            # Junta os parâmetros selecionados numa string separada por vírgulas
             parameters_string = ",".join(selected_parameters)
             
             base_url = "https://power.larc.nasa.gov/api/temporal/daily/point"
@@ -54,14 +55,13 @@ def index(request):
                 if df.empty:
                     raise KeyError("O DataFrame retornado pela API está vazio.")
 
-                # Dicionário com todos os nomes possíveis para renomear
                 rename_map = {
                     "ALLSKY_SFC_SW_DWN": "Radiação Solar (kWh/m²/dia)",
                     "T2M": "Temperatura (°C)",
                     "RH2M": "Umidade (%)",
                     "WS10M": "Vento (m/s)",
                     "PRECTOT": "Precipitação (mm/dia)",
-                    "PRECTOTCORR": "Precipitação (mm/dia)", # Adicionado para segurança
+                    "PRECTOTCORR": "Precipitação (mm/dia)",
                     "PS": "Pressão (kPa)"
                 }
                 df.rename(columns=rename_map, inplace=True)

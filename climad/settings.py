@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -115,19 +116,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-# Configuração de Ficheiros Estáticos
-# URL a ser usada ao referenciar ficheiros estáticos nos templates.
 STATIC_URL = "static/"
 
-# Diretórios onde o Django irá procurar por ficheiros estáticos.
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-# Diretório onde o Django irá juntar todos os ficheiros estáticos para produção.
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Chave da API do Google Maps lida a partir do ficheiro .env
+MAPS_API_KEY = config("Maps_API_KEY")

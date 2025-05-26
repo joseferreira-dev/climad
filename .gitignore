@@ -1,0 +1,8 @@
+# Ignorar o ficheiro de variáveis de ambiente
+.env
+
+# Outros ficheiros que o Git deve ignorar...
+venv/
+db.sqlite3
+__pycache__/
+staticfiles/

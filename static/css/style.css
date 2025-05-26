@@ -115,3 +115,12 @@ th {
     color: #333;
     font-weight: bold;
 }
+
+/* Estilo para o mapa */
+#map {
+    height: 400px; /* Altura do mapa */
+    width: 100%;
+    margin-bottom: 1em; /* Espaçamento abaixo do mapa */
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}

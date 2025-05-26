@@ -19,9 +19,10 @@
 
             <fieldset class="form-section">
                 <legend>Localização e Período</legend>
+                <div id="map"></div> 
                 <div class="form-grid">
-                    <input type="text" name="latitude" placeholder="Latitude (ex: -9.38)" required>
-                    <input type="text" name="longitude" placeholder="Longitude (ex: -40.50)" required>
+                    <input type="text" id="latitude-input" name="latitude" placeholder="Latitude (ex: -9.38)" required>
+                    <input type="text" id="longitude-input" name="longitude" placeholder="Longitude (ex: -40.50)" required>
                     <input type="date" name="start_date" required title="Data de Início">
                     <input type="date" name="end_date" required title="Data de Fim">
                 </div>
@@ -77,5 +78,6 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
     <script src="{% static "js/main.js" %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ Maps_api_key }}&callback=initMap" async defer></script>
 </body>
 </html>
