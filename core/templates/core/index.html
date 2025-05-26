@@ -24,11 +24,31 @@
                     <button type="button" id="map-search-button">Pesquisar</button>
                 </div>
                 <div id="map"></div> 
+
                 <div class="form-grid">
-                    <input type="text" id="latitude-input" name="latitude" placeholder="Latitude (ex: -9.38)" required>
-                    <input type="text" id="longitude-input" name="longitude" placeholder="Longitude (ex: -40.50)" required>
-                    <input type="date" name="start_date" required title="Data de Início" value="{{ default_start_date }}">
-                    <input type="date" name="end_date" required title="Data de Fim" value="{{ default_end_date }}">
+
+                    <div class="input-pair">
+                        <div class="form-group">
+                            <label for="latitude-input">Latitude</label>
+                            <input type="text" id="latitude-input" name="latitude" placeholder="-9.389083" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="longitude-input">Longitude</label>
+                            <input type="text" id="longitude-input" name="longitude" placeholder="-40.503620" required>
+                        </div>
+                    </div>
+
+                    <div class="input-pair">
+                        <div class="form-group">
+                            <label for="start-date-input">Data de Início</label>
+                            <input type="date" id="start-date-input" name="start_date" required title="Data de Início" value="{{ default_start_date }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="end-date-input">Data de Fim</label>
+                            <input type="date" id="end-date-input" name="end_date" required title="Data de Fim" value="{{ default_end_date }}">
+                        </div>
+                    </div>
+
                 </div>
             </fieldset>
             

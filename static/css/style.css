@@ -1,5 +1,3 @@
-/* static/css/style.css */
-
 /* Estilos Gerais */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -42,13 +40,32 @@ legend {
     font-weight: bold;
     color: #005a9c;
     padding: 0 0.5em;
+    font-size: 1.1em;
 }
 
 /* Grelha para os campos de texto e data */
 .form-grid {
+    display: flex;
+    flex-direction: column; /* Empilha os pares verticalmente */
+    gap: 1em; /* Espaço entre os pares de inputs */
+}
+
+.input-pair {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1em;
+    grid-template-columns: 1fr 1fr; /* Cria duas colunas de tamanho igual */
+    gap: 1em; /* Espaço entre os dois inputs do par */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+}
+
+.form-group label {
+    font-weight: 500;
+    font-size: 0.9em;
+    color: #333;
 }
 
 /* Grelha para as checkboxes */
@@ -63,6 +80,7 @@ legend {
     align-items: center;
     gap: 0.5em;
     cursor: pointer;
+    font-size: 0.95em;
 }
 
 /* Estilo dos Inputs */
@@ -73,6 +91,7 @@ input[type="date"] {
     border-radius: 4px;
     width: 100%;
     box-sizing: border-box; /* Garante que o padding não aumente a largura total */
+    font-size: 1em;
 }
 
 /* Botão de Submissão */
@@ -102,29 +121,6 @@ input[type="date"] {
     color: #c62828; /* Texto vermelho escuro */
     border-radius: 8px;
     text-align: center;
-}
-
-/* Estilos da Tabela (mantidos e melhorados) */
-.results {
-    margin-top: 2em;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1em;
-}
-
-th, td {
-    padding: 10px 14px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-    color: #333;
-    font-weight: bold;
 }
 
 /* Estilo para o mapa */
@@ -157,4 +153,27 @@ th {
 }
 #map-search-button:hover {
     background-color: #333;
+}
+
+/* Estilos da Tabela (mantidos e melhorados) */
+.results {
+    margin-top: 2em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+}
+
+th, td {
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
 }
