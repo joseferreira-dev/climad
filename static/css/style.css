@@ -177,3 +177,39 @@ th {
     color: #333;
     font-weight: bold;
 }
+
+/* Estilos para a seção de gráficos ApexCharts */
+.charts-wrapper-apex { /* Novo nome para o contentor principal */
+    margin-top: 2em;
+    display: flex; /* Usar flexbox para os gráficos ficarem um acima do outro */
+    flex-direction: column;
+    gap: 2em; /* Espaço entre os gráficos */
+}
+
+.chart-card-apex { /* Novo nome para o card de cada gráfico */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1em;
+    background-color: #fff; /* Fundo branco para os gráficos */
+    /* A altura será definida pelo ApexCharts ou pode ser definida aqui se necessário */
+}
+
+.chart-card-apex h4 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1em; /* Aumenta o espaço abaixo do título */
+    color: #333;
+}
+
+/* O ApexCharts cria os seus próprios elementos internos, 
+   geralmente não precisamos de estilizar o 'canvas' diretamente.
+   O div com id="apexchart-X" é onde o gráfico é renderizado. */
+
+/* Remove as regras antigas do Chart.js se ainda existirem: */
+/* .charts-grid, .chart-card, .chart-card canvas */
+
+/* Garante que a grelha de inputs e checkboxes não interfere */
+@media (max-width: 992px) {
+    /* Não precisamos de regra específica para .charts-wrapper-apex aqui,
+       pois o flex-direction: column já os empilha. */
+}

@@ -8,7 +8,7 @@
     <title>Climad - Análise Climática</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
-</head>
+    </head>
 <body>
     <div class="container">
         <h1>Climad 🌦️</h1>
@@ -16,7 +16,6 @@
 
         <form method="post" class="climad-form">
             {% csrf_token %}
-
             <fieldset class="form-section">
                 <legend>Localização e Período</legend>
                 <div class="map-search-wrapper">
@@ -24,7 +23,6 @@
                     <button type="button" id="map-search-button">Pesquisar</button>
                 </div>
                 <div id="map"></div> 
-
                 <div class="form-grid">
                     <div class="input-pair">
                         <div class="form-group">
@@ -48,7 +46,6 @@
                     </div>
                 </div>
             </fieldset>
-            
             <fieldset class="form-section">
                 <legend>Variáveis Climáticas</legend>
                 <div class="checkbox-grid">
@@ -62,9 +59,7 @@
                     {% endwith %}
                 </div>
             </fieldset>
-
             <button type="submit" class="submit-button">Buscar Dados</button>
-
             {% if error %}
                 <div class="form-error">
                     {{ error }}
@@ -97,12 +92,30 @@
                     </table>
                 </div>
 
+                <div id="charts-container-apex" class="charts-wrapper-apex">
+                    {% if apex_charts_data_for_template_loop %} {# Usa a nova variável do contexto #}
+                        {% for series_info in apex_charts_data_for_template_loop %} {# Itera sobre a lista Python #}
+                            <div class="chart-card-apex">
+                                <h4>{{ series_info.name }}</h4>
+                                <div id="apexchart-{{ forloop.counter }}"></div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
+            </div>
         {% endif %}
     </div>
     
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    
+    {% if apex_chart_data_json %}
+    <script id="apex-chart-data-script" type="application/json">
+        {{ apex_chart_data_json|safe }}
+    </script>
+    {% endif %}
+
     <script src="{% static "js/main.js" %}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key={{ Maps_api_key }}&callback=initMap" async defer></script>
 </body>
