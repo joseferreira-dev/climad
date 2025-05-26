@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climad - Análise Climática</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Climad 🌦️</h1>
+        <p>Insira a latitude e longitude para consultar os dados climáticos da NASA POWER.</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="latitude" placeholder="Latitude (ex: -9.38)" required>
+            <input type="text" name="longitude" placeholder="Longitude (ex: -40.50)" required>
+            <button type="submit">Buscar Dados</button>
+        </form>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        {% if weather_data %}
+            <div class="results">
+                <h2>Resultados para Latitude: {{ latitude }}, Longitude: {{ longitude }}</h2>
+                <ul>
+                    <li><strong>Radiação Solar Média:</strong> {{ weather_data.rad_solar }} kWh/m²/dia</li>
+                    <li><strong>Temperatura Média a 2m:</strong> {{ weather_data.temperatura }} °C</li>
+                    <li><strong>Umidade Relativa Média a 2m:</strong> {{ weather_data.umidade }} %</li>
+                    <li><strong>Velocidade do Vento Média a 10m:</strong> {{ weather_data.vento }} m/s</li>
+                    <li><strong>Precipitação Média:</strong> {{ weather_data.precipitacao }} mm/dia</li>
+                    <li><strong>Pressão Atmosférica Média:</strong> {{ weather_data.pressao }} kPa</li>
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
