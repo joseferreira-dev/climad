@@ -93,6 +93,17 @@ input[type="date"] {
     background-color: #004175;
 }
 
+/* Estilo para a mensagem de erro do formulário */
+.form-error {
+    margin-top: 1.5em;
+    padding: 1em;
+    border: 1px solid #e57373; /* Borda vermelha clara */
+    background-color: #ffebee; /* Fundo vermelho muito claro */
+    color: #c62828; /* Texto vermelho escuro */
+    border-radius: 8px;
+    text-align: center;
+}
+
 /* Estilos da Tabela (mantidos e melhorados) */
 .results {
     margin-top: 2em;
@@ -123,4 +134,27 @@ th {
     margin-bottom: 1em; /* Espaçamento abaixo do mapa */
     border-radius: 8px;
     border: 1px solid #ddd;
+}
+
+/* Estilos para a busca no mapa */
+.map-search-wrapper {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1em;
+}
+
+#map-search-input {
+    flex-grow: 1; /* Faz o input ocupar o espaço disponível */
+}
+
+#map-search-button {
+    padding: 10px 15px;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#map-search-button:hover {
+    background-color: #333;
 }

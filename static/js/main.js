@@ -1,32 +1,48 @@
-// Variáveis globais para o mapa e o marcador
 let map;
 let marker;
+let geocoder; // Variável para o serviço de geocoding
 
-// Função chamada pelo script do Google Maps quando ele carrega
 function initMap() {
-    // Coordenadas iniciais do mapa (centro de Recife)
     const initialCoords = { lat: -8.047562, lng: -34.877064 };
 
-    // Cria o mapa
     map = new google.maps.Map(document.getElementById("map"), {
         center: initialCoords,
         zoom: 8,
     });
+    
+    // Inicializa o Geocoder
+    geocoder = new google.maps.Geocoder();
 
-    // Adiciona um "ouvinte" de cliques ao mapa
     map.addListener("click", (event) => {
         placeMarker(event.latLng);
         updateFormFields(event.latLng);
     });
+
+    // Adiciona o "ouvinte" para o botão de pesquisa do mapa
+    document.getElementById("map-search-button").addEventListener("click", () => {
+        geocodeAddress();
+    });
 }
 
-// Função para colocar/mover o marcador no mapa
+// NOVA FUNÇÃO para pesquisar o endereço
+function geocodeAddress() {
+    const address = document.getElementById("map-search-input").value;
+    geocoder.geocode({ address: address }, (results, status) => {
+        if (status === "OK") {
+            const location = results[0].geometry.location;
+            map.setCenter(location);
+            placeMarker(location);
+            updateFormFields(location);
+        } else {
+            alert("Não foi possível encontrar o local: " + status);
+        }
+    });
+}
+
 function placeMarker(location) {
     if (marker) {
-        // Se o marcador já existe, apenas muda a sua posição
         marker.setPosition(location);
     } else {
-        // Se não, cria um novo marcador
         marker = new google.maps.Marker({
             position: location,
             map: map,
@@ -34,13 +50,9 @@ function placeMarker(location) {
     }
 }
 
-// Função para atualizar os campos de latitude e longitude do formulário
 function updateFormFields(location) {
-    // Arredonda as coordenadas para 6 casas decimais
     const lat = location.lat().toFixed(6);
     const lng = location.lng().toFixed(6);
-
-    // Encontra os inputs pelos IDs e atualiza os seus valores
     document.getElementById("latitude-input").value = lat;
     document.getElementById("longitude-input").value = lng;
 }

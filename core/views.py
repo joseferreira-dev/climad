@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 from django.shortcuts import render
 from django.conf import settings
+from datetime import date, timedelta
 
 def index(request):
     """
@@ -10,6 +11,12 @@ def index(request):
     """
     context = {}
     context["Maps_api_key"] = settings.MAPS_API_KEY
+
+    if request.method == "GET":
+        today = date.today()
+        one_month_ago = today - timedelta(days=30)
+        context["default_start_date"] = one_month_ago.strftime("%Y-%m-%d")
+        context["default_end_date"] = today.strftime("%Y-%m-%d")
 
     if request.method == "POST":
         latitude = request.POST.get("latitude")
@@ -20,6 +27,10 @@ def index(request):
 
         if not selected_parameters:
             context["error"] = "Por favor, selecione pelo menos uma variável climática."
+            today = date.today()
+            one_month_ago = today - timedelta(days=30)
+            context["default_start_date"] = one_month_ago.strftime("%Y-%m-%d")
+            context["default_end_date"] = today.strftime("%Y-%m-%d")
             return render(request, "core/index.html", context)
 
         if start_date_raw > end_date_raw:
@@ -30,9 +41,13 @@ def index(request):
             start_date_api = start_date_raw.replace("-", "")
             end_date_api = end_date_raw.replace("-", "")
 
+            start_date_obj = date.fromisoformat(start_date_raw)
+            end_date_obj = date.fromisoformat(end_date_raw)
+
             context.update({
                 "latitude": latitude, "longitude": longitude,
-                "start_date": start_date_raw, "end_date": end_date_raw
+                "start_date_formatted": start_date_obj.strftime("%d/%m/%Y"),
+                "end_date_formatted": end_date_obj.strftime("%d/%m/%Y")
             })
 
             parameters_string = ",".join(selected_parameters)
@@ -74,8 +89,9 @@ def index(request):
                 context["table_data"] = df.to_dict("records")
 
             except requests.exceptions.RequestException as e:
-                context["error"] = f"Erro ao acessar a API da NASA: {e}"
+                print("ERRO DE API:", e)
+                context["error"] = "Ocorreu um erro de comunicação com o serviço de dados climáticos. Por favor, tente novamente mais tarde."
             except KeyError:
-                 context["error"] = "Não foi possível encontrar dados para a seleção. Verifique os dados."
+                context["error"] = "Não foram encontrados dados para a combinação de local e período selecionados. Por favor, verifique os dados."
 
     return render(request, "core/index.html", context)

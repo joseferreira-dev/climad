@@ -19,12 +19,16 @@
 
             <fieldset class="form-section">
                 <legend>Localização e Período</legend>
+                <div class="map-search-wrapper">
+                    <input type="text" id="map-search-input" placeholder="Pesquisar local no mapa...">
+                    <button type="button" id="map-search-button">Pesquisar</button>
+                </div>
                 <div id="map"></div> 
                 <div class="form-grid">
                     <input type="text" id="latitude-input" name="latitude" placeholder="Latitude (ex: -9.38)" required>
                     <input type="text" id="longitude-input" name="longitude" placeholder="Longitude (ex: -40.50)" required>
-                    <input type="date" name="start_date" required title="Data de Início">
-                    <input type="date" name="end_date" required title="Data de Fim">
+                    <input type="date" name="start_date" required title="Data de Início" value="{{ default_start_date }}">
+                    <input type="date" name="end_date" required title="Data de Fim" value="{{ default_end_date }}">
                 </div>
             </fieldset>
             
@@ -33,24 +37,26 @@
                 <div class="checkbox-grid">
                     <label><input type="checkbox" name="parameters" value="ALLSKY_SFC_SW_DWN" checked> Radiação Solar</label>
                     <label><input type="checkbox" name="parameters" value="T2M" checked> Temperatura</label>
-                    <label><input type="checkbox" name="parameters" value="RH2M"> Umidade</label>
-                    <label><input type="checkbox" name="parameters" value="WS10M"> Vento</label>
+                    <label><input type="checkbox" name="parameters" value="RH2M" checked> Umidade</label>
+                    <label><input type="checkbox" name="parameters" value="WS10M" checked> Vento</label>
                     <label><input type="checkbox" name="parameters" value="PRECTOT" checked> Precipitação</label>
-                    <label><input type="checkbox" name="parameters" value="PS"> Pressão</label>
+                    <label><input type="checkbox" name="parameters" value="PS" checked> Pressão</label>
                 </div>
             </fieldset>
 
             <button type="submit" class="submit-button">Buscar Dados</button>
-        </form>
 
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
+            {% if error %}
+                <div class="form-error">
+                    {{ error }}
+                </div>
+            {% endif %}
+        </form>
 
         {% if table_data %}
             <div class="results">
                 <h2>Resultados para Latitude: {{ latitude }}, Longitude: {{ longitude }}</h2>
-                <h3>Dados diários de {{ start_date }} a {{ end_date }}</h3>
+                <h3>Dados diários de {{ start_date_formatted }} a {{ end_date_formatted }}</h3>
                 <div style="overflow-x:auto;">
                     <table id="climate-table" class="display" style="width:100%">
                         <thead>
