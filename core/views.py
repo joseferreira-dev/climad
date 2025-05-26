@@ -115,7 +115,7 @@ def index(request):
                 context["apex_charts_data_for_template_loop"] = apex_charts_series_data_list
                 # Passa a STRING JSON para o JavaScript usar para os dados dos gráficos
                 context["apex_chart_data_json"] = json.dumps(apex_charts_series_data_list)
-                print("DEBUG: apex_chart_data_json:", context["apex_chart_data_json"])
+                # print("DEBUG: apex_chart_data_json:", context["apex_chart_data_json"])
 
                 # Prepara dados para a tabela
                 table_columns_ordered = ["Data_Para_Tabela"] + [

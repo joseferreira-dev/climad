@@ -1,21 +1,31 @@
+// static/js/main.js
+
+// Variáveis globais para o Google Maps
 let map;
 let marker;
 let geocoder;
-let renderedApexCharts = []; // Para guardar referências aos gráficos ApexCharts
 
+// Para guardar referências aos gráficos ApexCharts e destruí-los se necessário
+let renderedApexCharts = []; 
+
+// Função de inicialização do Google Maps (chamada pelo script da API no HTML)
 function initMap() {
-    const initialCoords = { lat: -8.047562, lng: -34.877064 }; // Recife
+    const initialCoords = { lat: -8.047562, lng: -34.877064 }; // Coordenadas de Recife como padrão
     map = new google.maps.Map(document.getElementById("map"), {
         center: initialCoords,
         zoom: 7,
     });
+    
     geocoder = new google.maps.Geocoder();
+
     map.addListener("click", (event) => {
         placeMarker(event.latLng);
         updateFormFields(event.latLng);
     });
-    if (document.getElementById("map-search-button")) {
-        document.getElementById("map-search-button").addEventListener("click", () => {
+
+    const mapSearchButton = document.getElementById("map-search-button");
+    if (mapSearchButton) {
+        mapSearchButton.addEventListener("click", () => {
             geocodeAddress();
         });
     }
@@ -52,6 +62,7 @@ function updateFormFields(location) {
     }
 }
 
+// Função para renderizar os gráficos ApexCharts
 function renderApexCharts() {
     console.log("renderApexCharts() chamada");
     const dataScript = document.getElementById("apex-chart-data-script");
@@ -59,7 +70,6 @@ function renderApexCharts() {
     // Limpa gráficos anteriores
     renderedApexCharts.forEach(chart => chart.destroy());
     renderedApexCharts = [];
-    // Limpa o conteúdo HTML dos cards, caso existam de uma renderização anterior com erro
     $(".chart-card-apex div[id^='apexchart-']").empty();
 
 
@@ -85,99 +95,69 @@ function renderApexCharts() {
         return;
     }
 
-    $("#charts-container-apex").show(); // Mostra o contentor de gráficos
+    $("#charts-container-apex").show(); 
 
     seriesDataForCharts.forEach((seriesInfo, index) => {
-        const chartElementId = "apexchart-" + (index + 1); // ID simples baseado no índice
+        const chartElementId = "apexchart-" + (index + 1); 
         const chartElement = document.getElementById(chartElementId);
 
         if (chartElement) {
             const options = {
                 chart: {
                     type: 'line',
-                    height: 300, // Altura fixa para cada gráfico
-                    animations: {
-                        enabled: true, // Animações suaves
-                        easing: 'easeinout',
-                        speed: 800,
-                    },
-                    toolbar: { // Permite exportar, zoom, etc.
-                        show: true 
-                    }
+                    height: 300, 
+                    animations: { enabled: true, easing: 'easeinout', speed: 800 },
+                    toolbar: { show: true }
                 },
-                series: [{ // ApexCharts espera um array de séries
+                series: [{
                     name: seriesInfo.name,
-                    data: seriesInfo.data // seriesInfo.data já é [{x: 'DD/MM/AAAA', y: valor}, ...]
+                    data: seriesInfo.data 
                 }],
                 xaxis: {
-                    type: 'category', // Nossas datas DD/MM/AAAA são categorias
+                    type: 'category', 
                     labels: {
-                        rotate: -45,
-                        rotateAlways: false,
-                        hideOverlappingLabels: true,
-                        trim: true,
-                        style: {
-                            fontSize: '10px'
-                        }
+                        rotate: -45, rotateAlways: false, hideOverlappingLabels: true,
+                        trim: true, style: { fontSize: '10px' }
                     },
-                    tooltip: {
-                        enabled: false // Evita tooltip no eixo X se for muito denso
-                    }
+                    tooltip: { enabled: false }
                 },
                 yaxis: {
                     labels: {
-                        style: {
-                            fontSize: '10px'
-                        },
+                        style: { fontSize: '10px' },
                         formatter: function (value) {
-                           // Arredonda para 2 casas decimais se for float, senão mantém
                            return (typeof value === 'number' && value % 1 !== 0) ? value.toFixed(2) : value;
                         }
                     }
                 },
-                stroke: {
-                    curve: 'smooth', // Linhas suavizadas
-                    width: 2
-                },
+                stroke: { curve: 'smooth', width: 2 },
                 tooltip: {
-                    x: {
-                        format: 'dd/MM/yyyy' // Formato da data no tooltip
-                    },
+                    x: { format: 'dd/MM/yyyy' },
                     y: {
                          formatter: function (value) {
                            return (typeof value === 'number' && value % 1 !== 0) ? value.toFixed(2) : value;
                         }
                     }
                 },
-                noData: { // Mensagem se a série não tiver dados (após filtrar -999)
-                    text: "Sem dados para exibir neste período",
-                    align: 'center',
-                    verticalAlign: 'middle',
-                    offsetX: 0,
-                    offsetY: 0,
-                    style: {
-                        color: undefined,
-                        fontSize: '14px',
-                        fontFamily: undefined
-                    }
-                }
+                noData: { text: "Sem dados para exibir neste período" }
             };
 
             const chart = new ApexCharts(chartElement, options);
             chart.render();
-            renderedApexCharts.push(chart); // Guarda a referência para destruir depois
+            renderedApexCharts.push(chart); 
         } else {
             console.warn("Elemento do gráfico não encontrado:", chartElementId);
         }
     });
 }
 
+
+// Código executado quando o documento HTML está completamente carregado
 $(document).ready(function() {
-    // Inicializa o DataTables se a tabela existir
+    // Inicializa o DataTables se a tabela com ID 'climate-table' existir na página
     if ($('#climate-table').length) {
         $('#climate-table').DataTable({
-            lengthMenu: [10, 20, 50, 100],
-            language: { // Traduções do DataTables
+            lengthMenu: [10, 20, 50, 100], 
+            language: { // Traduções para o português do Brasil
                 "sEmptyTable": "Nenhum registo encontrado",
                 "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registos",
                 "sInfoEmpty": "Mostrando 0 até 0 de 0 registos",
@@ -199,10 +179,47 @@ $(document).ready(function() {
                     "sSortAscending": ": Ordenar colunas de forma ascendente",
                     "sSortDescending": ": Ordenar colunas de forma descendente"
                 }
-            }
+            },
+            // Configuração para adicionar os botões de exportação
+            dom: 'lBfrtip', 
+            buttons: [
+                {
+                    extend: 'excelHtml5', text: 'Excel', titleAttr: 'Exportar para Excel',
+                    className: 'dt-button buttons-excel buttons-html5'
+                },
+                {
+                    extend: 'csvHtml5', text: 'CSV', titleAttr: 'Exportar para CSV',
+                    className: 'dt-button buttons-csv buttons-html5'
+                },
+                {
+                    text: 'JSON (copiar)', titleAttr: 'Copiar dados em formato JSON',
+                    className: 'dt-button buttons-json buttons-html5',
+                    action: function ( e, dt, button, config ) {
+                        var data = dt.buttons.exportData();
+                        var jsonData = data.body.map(row => {
+                            let obj = {};
+                            data.header.forEach((header, i) => { obj[header] = row[i]; });
+                            return obj;
+                        });
+                        var jsonOutput = JSON.stringify(jsonData, null, 2);
+                        if (navigator.clipboard && navigator.clipboard.writeText) {
+                            navigator.clipboard.writeText(jsonOutput).then(function() {
+                                alert('Dados JSON copiados para a área de transferência!');
+                            }, function(err) {
+                                alert('Erro ao copiar dados JSON. Tente manualmente.');
+                                console.error('Erro ao copiar JSON: ', err);
+                            });
+                        } else {
+                            alert('Não foi possível copiar automaticamente. Por favor, copie o JSON da consola do navegador.');
+                            console.log("Dados JSON para cópia manual:\n", jsonOutput);
+                        }
+                    }
+                }
+            ]
         });
     }
 
+    // Renderiza os gráficos ApexCharts se o script de dados existir e tiver conteúdo
     const dataScript = document.getElementById("apex-chart-data-script");
     if (dataScript && dataScript.textContent.trim() !== "") {
         renderApexCharts();
