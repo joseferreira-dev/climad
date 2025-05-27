@@ -1,215 +1,239 @@
-/* Estilos Gerais */
+/* static/css/style.css (VERSÃO COM SIDEBAR E LEGENDAS INTERNAS) */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600&display=swap');
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     margin: 0;
-    background-color: #f4f7f6;
-    color: #333;
-    padding: 1em;
+    background-color: #f0f4f8; /* Um cinza azulado ainda mais claro para o fundo geral */
+    color: #334155; /* Texto principal um pouco mais suave */
+    line-height: 1.65;
+    display: flex; /* Prepara o body para o page-wrapper, mas o wrapper é o principal */
 }
 
-.container {
-    max-width: 960px;
-    margin: auto;
-    background: white;
-    padding: 2em;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-h1 {
-    color: #005a9c;
+/* LAYOUT PRINCIPAL COM SIDEBAR */
+.page-wrapper {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    width: 100%;
+    min-height: 100vh; /* Garante que ocupa a altura toda da viewport */
 }
 
-/* Layout Principal do Formulário */
+.sidebar {
+    width: 260px; /* Largura da sidebar */
+    background-color: #1e293b; /* Cor de fundo escura para a sidebar (azul noite) */
+    color: #e2e8f0; /* Cor de texto clara para a sidebar */
+    padding: 2em 1.5em;
+    display: flex;
+    flex-direction: column;
+    position: fixed; /* Sidebar fixa */
+    height: 100%;
+    left: 0;
+    top: 0;
+    box-shadow: 3px 0px 15px rgba(0,0,0,0.1); /* Sombra para dar profundidade */
+}
+
+.sidebar-header h1 {
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff; /* Título branco */
+    font-size: 2em; /* Tamanho ajustado para a sidebar */
+    font-weight: 700;
+    margin-bottom: 1.5em;
+    padding-bottom: 0.5em;
+    border-bottom: 2px solid #334155; /* Linha separadora sutil */
+    text-align: center; /* Centraliza o título da sidebar */
+}
+.sidebar-header h1 .emoji { /* Se quiser estilizar o emoji separadamente */
+    font-size: 1.2em;
+}
+
+.sidebar-nav {
+    margin-top: 1em;
+}
+.sidebar-nav a {
+    display: block;
+    color: #94a3b8; /* Cor de link mais clara */
+    text-decoration: none;
+    padding: 0.8em 0;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+    font-size: 1.05em;
+}
+.sidebar-nav a:hover {
+    background-color: #334155; /* Fundo no hover */
+    color: #ffffff;
+}
+
+.main-content {
+    flex-grow: 1; /* Ocupa o resto do espaço */
+    padding: 2em 2.5em; /* Padding para o conteúdo principal */
+    margin-left: 260px; /* MESMA LARGURA DA SIDEBAR para não sobrepor */
+    overflow-y: auto; /* Permite scroll no conteúdo principal se necessário */
+}
+
+.container { /* Ajustes no container, já que agora está dentro de main-content */
+    max-width: 100%; /* Ocupa a largura do main-content */
+    margin: 0 auto; /* Remove margem lateral, já controlada pelo main-content */
+    padding: 2em; /* Padding interno do container */
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+
+p.page-description { /* Estilo para o parágrafo abaixo do H1 (agora na sidebar) */
+    font-size: 1.1em;
+    color: #4a5568; /* Um cinza mais escuro para bom contraste no branco */
+    margin-bottom: 2em;
+    text-align: left; /* Alinha o texto da descrição à esquerda */
+}
+
+h2 { /* Títulos de secção de resultados */
+    color: #1e40af; /* Azul mais escuro */
+    font-size: 1.8em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    border-bottom: 2px solid #dbeafe; /* Borda azul bem clara */
+    padding-bottom: 0.3em;
+}
+h3 { /* Subtítulos (datas) */
+    color: #64748b; /* Cinza azulado */
+    font-size: 1.1em;
+    font-weight: 400;
+    margin-bottom: 1.5em;
+}
+
+/* Formulário e Fieldsets com Legenda Interna */
 .climad-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5em; /* Espaçamento entre as seções do formulário */
+    gap: 2.5em; 
 }
 
 .form-section {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 1.5em;
+    border: 1px solid #e2e8f0; /* Borda suave para o card */
+    border-radius: 10px; /* Bordas mais arredondadas */
+    padding: 1.5em; /* Padding interno */
+    padding-top: 2.5em; /* MAIS PADDING NO TOPO para acomodar a legenda */
+    background-color: #ffffff; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    position: relative; /* Essencial para posicionar a legenda */
 }
 
 legend {
-    font-weight: bold;
-    color: #005a9c;
-    padding: 0 0.5em;
-    font-size: 1.1em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500; 
+    color: #ffffff; /* Texto da legenda branco */
+    background-color: #0056b3; /* Fundo azul para a legenda (pode ajustar) */
+    padding: 0.5em 1em; 
+    font-size: 1.1em; 
+    border-radius: 6px 6px 0 0; /* Arredonda os cantos superiores */
+    
+    /* Posicionamento para o efeito "interno" */
+    position: absolute;
+    top: -1px; /* Ajusta para sobrepor a borda do fieldset */
+    left: -1px; /* Ajusta para sobrepor a borda do fieldset */
+    width: calc(100% + 2px); /* Compensa as bordas do fieldset */
+    border-bottom: 1px solid #004a99; /* Linha inferior para separar do conteúdo */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+/* Ajuste para o conteúdo não ficar por baixo da legenda "flutuante" */
+.form-section > *:not(legend) {
+    margin-top: 0.5em; /* Ajuste conforme necessário */
 }
 
-/* Grelha para os campos de texto e data */
-.form-grid {
-    display: flex;
-    flex-direction: column; 
-    gap: 1em; 
-}
 
-.input-pair {
-    display: grid;
-    grid-template-columns: 1fr 1fr; 
-    gap: 1em; 
-}
+/* Grelha para inputs e checkboxes (mantidos os estilos anteriores com pequenos ajustes) */
+.form-grid { display: flex; flex-direction: column; gap: 1.5em; }
+.input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; }
+.form-group { display: flex; flex-direction: column; gap: 0.5em; }
+.form-group label { font-weight: 500; font-size: 0.95em; color: #334155; margin-bottom: 0.2em; }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4em;
-}
+.checkbox-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1em 1.5em; padding-top: 1em; }
+.checkbox-grid label { display: flex; align-items: center; gap: 0.75em; cursor: pointer; font-size: 1em; padding: 0.35em 0; transition: color 0.2s; }
+.checkbox-grid label:hover { color: #1e40af; }
+.checkbox-grid input[type="checkbox"] { width: 1.2em; height: 1.2em; accent-color: #2563eb; cursor: pointer; }
 
-.form-group label {
-    font-weight: 500;
-    font-size: 0.9em;
-    color: #333;
-}
-
-/* Grelha para as checkboxes */
-.checkbox-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 0.75em;
-}
-
-.checkbox-grid label {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-    cursor: pointer;
-    font-size: 0.95em;
-}
-
-/* Estilo dos Inputs */
 input[type="text"],
 input[type="date"] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    box-sizing: border-box; 
-    font-size: 1em;
+    padding: 0.8em 1em; border: 1px solid #cbd5e0; border-radius: 6px; 
+    width: 100%; font-size: 1em; font-family: 'Open Sans', sans-serif;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+input[type="text"]:focus,
+input[type="date"]:focus {
+    border-color: #3b82f6; outline: 0; box-shadow: 0 0 0 3px rgba(59,130,246,.25);
 }
 
-/* Botão de Submissão */
-.submit-button {
-    padding: 12px 20px;
-    background-color: #005a9c;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1.1em;
-    font-weight: bold;
-    transition: background-color 0.2s;
-    align-self: flex-start; 
+
+/* Botões (mantidos os estilos anteriores) */
+.button-base-style { padding: 0.8em 1.8em; border: none; border-radius: 8px; cursor: pointer; font-size: 1em; font-weight: 600; letter-spacing: 0.5px; transition: background-color 0.2s, transform 0.15s, box-shadow 0.15s; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.button-base-style:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+.button-base-style:active { transform: translateY(0px); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+
+.submit-button { padding: 0.8em 1.8em; border: none; border-radius: 8px; cursor: pointer; font-size: 1em; font-weight: 600; letter-spacing: 0.5px; transition: background-color 0.2s, transform 0.15s, box-shadow 0.15s; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); background-color: #2563eb; color: white; font-size: 1.1em; align-self: flex-start; }
+.submit-button:hover { background-color: #1d4ed8; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+
+#map-search-button { padding: 0.8em 1.2em; border: none; border-radius: 8px; cursor: pointer; font-size: 0.95em; font-weight: 500; letter-spacing: 0.5px; transition: background-color 0.2s, transform 0.15s, box-shadow 0.15s; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.08); background-color: #475569; color: white; }
+#map-search-button:hover { background-color: #334155; transform: translateY(-2px); box-shadow: 0 3px 6px rgba(0,0,0,0.12); }
+
+.form-error { margin-top: 1.5em; padding: 1em 1.5em; border: 1px solid #fca5a5; background-color: #fff1f2; color: #b91c1c; border-radius: 8px; text-align: left; box-shadow: 0 2px 4px rgba(252,165,165,0.3); }
+
+/* Mapa, Tabela e Gráficos (estilos maioritariamente mantidos) */
+#map { height: 350px; width: 100%; margin-bottom: 1.5em; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.map-search-wrapper { display: flex; gap: 0.75em; margin-bottom: 1em; padding-top: 1em; }
+#map-search-input { flex-grow: 1; }
+
+.results { margin-top: 3em; }
+table.dataTable { border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+table.dataTable th, table.dataTable td { padding: 0.9em 1.1em; border-top: 1px solid #e2e8f0; border-bottom: 0; border-left: 0; border-right: 0; }
+table.dataTable thead th { background-color: #f8fafc; color: #334155; font-weight: 600; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.75px; border-bottom: 2px solid #e2e8f0; }
+table.dataTable tbody tr:nth-child(even) { background-color: transparent; } /* Remove zebra striping para um look mais clean */
+table.dataTable tbody tr:hover { background-color: #f0f9ff; } /* Azul muito, muito claro no hover */
+
+.dt-buttons .dt-button { padding: 0.6em 1.2em; border-radius: 6px; cursor: pointer; font-size: 0.9em; font-weight: 500; transition: background-color 0.2s, transform 0.15s, box-shadow 0.15s; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.08); background-color: #64748b; color: white; margin-left: 0.5em; border: none; }
+.dt-buttons .dt-button:hover { background-color: #475569; transform: translateY(-2px); box-shadow: 0 3px 6px rgba(0,0,0,0.12); }
+
+.charts-wrapper-apex { margin-top: 3em; display: flex; flex-direction: column; gap: 2.5em; }
+.chart-card-apex { border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5em; background-color: #ffffff; box-shadow: 0 6px 15px rgba(0,0,0,0.07); }
+.chart-card-apex h4 { text-align: center; margin-top: 0; margin-bottom: 1.5em; color: #1e40af; font-size: 1.25em; font-weight: 500; }
+
+/* Ajustes de Responsividade para Sidebar */
+@media (max-width: 992px) { /* Ponto de quebra para a sidebar */
+    .sidebar {
+        width: 220px; /* Sidebar mais estreita em ecrãs médios */
+    }
+    .main-content {
+        margin-left: 220px;
+    }
 }
 
-.submit-button:hover {
-    background-color: #004175;
-}
+@media (max-width: 768px) {
+    .page-wrapper {
+        flex-direction: column; /* Empilha sidebar e conteúdo */
+    }
+    .sidebar {
+        position: static; /* Remove fixação */
+        width: 100%;
+        height: auto; /* Altura automática */
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .sidebar-header h1 { font-size: 1.6em; margin-bottom: 1em; }
+    .sidebar-nav { display: flex; justify-content: center; gap: 1em; } /* Links lado a lado */
+    .sidebar-nav a { padding: 0.6em 1em; }
 
-/* Estilo para a mensagem de erro do formulário */
-.form-error {
-    margin-top: 1.5em;
-    padding: 1em;
-    border: 1px solid #e57373;
-    background-color: #ffebee; 
-    color: #c62828; 
-    border-radius: 8px;
-    text-align: center;
-}
+    .main-content {
+        margin-left: 0; /* Remove margem quando empilhado */
+        padding: 1.5em;
+    }
+    .container { padding: 1.5em; margin-top: 1em; } /* Adiciona margem superior ao container */
 
-/* Estilo para o mapa */
-#map {
-    height: 400px; 
-    width: 100%;
-    margin-bottom: 1em; 
-    border-radius: 8px;
-    border: 1px solid #ddd;
-}
-
-/* Estilos para a busca no mapa */
-.map-search-wrapper {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 1em;
-}
-
-#map-search-input {
-    flex-grow: 1; 
-}
-
-#map-search-button {
-    padding: 10px 15px;
-    background-color: #555;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-#map-search-button:hover {
-    background-color: #333;
-}
-
-/* Estilos da Tabela */
-.results {
-    margin-top: 2em;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1em;
-}
-
-th, td {
-    padding: 10px 14px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-    color: #333;
-    font-weight: bold;
-}
-
-/* Estilos para a seção de gráficos ApexCharts */
-.charts-wrapper-apex { /* Novo nome para o contentor principal */
-    margin-top: 2em;
-    display: flex; /* Usar flexbox para os gráficos ficarem um acima do outro */
-    flex-direction: column;
-    gap: 2em; /* Espaço entre os gráficos */
-}
-
-.chart-card-apex { /* Novo nome para o card de cada gráfico */
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 1em;
-    background-color: #fff; /* Fundo branco para os gráficos */
-    /* A altura será definida pelo ApexCharts ou pode ser definida aqui se necessário */
-}
-
-.chart-card-apex h4 {
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 1em; /* Aumenta o espaço abaixo do título */
-    color: #333;
-}
-
-/* O ApexCharts cria os seus próprios elementos internos, 
-   geralmente não precisamos de estilizar o 'canvas' diretamente.
-   O div com id="apexchart-X" é onde o gráfico é renderizado. */
-
-/* Remove as regras antigas do Chart.js se ainda existirem: */
-/* .charts-grid, .chart-card, .chart-card canvas */
-
-/* Garante que a grelha de inputs e checkboxes não interfere */
-@media (max-width: 992px) {
-    /* Não precisamos de regra específica para .charts-wrapper-apex aqui,
-       pois o flex-direction: column já os empilha. */
+    .input-pair { grid-template-columns: 1fr; }
+    .checkbox-grid { grid-template-columns: 1fr; }
+    .map-search-wrapper { flex-direction: column; }
+    #map-search-button, .submit-button { width: 100%; }
+    h1.main-title-in-container { font-size: 1.8em; text-align: center; } /* Se precisar de um título principal no conteúdo */
 }
