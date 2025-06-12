@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Climad - Análise Climática</title>
+    <title>Climad - {{ page_title|default:"Análise Climática" }}</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
@@ -14,7 +14,7 @@
     <div class="page-wrapper">
         <aside class="sidebar">
             <div class="sidebar-header">
-                <h1>Climad 🌦️</h1>
+                <h1>CLIMAD</h1>
             </div>
             <nav class="sidebar-nav">
                 <a href="{% url 'daily_data' %}" class="nav-link active">Dados Diários</a>

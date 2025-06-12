@@ -82,7 +82,7 @@ def index(request):
                 # e cria uma formatada para a tabela
                 df["Data_Para_Tabela"] = pd.to_datetime(df.index, format="%Y%m%d").strftime("%d/%m/%Y")
                 
-                # **** PREPARAÇÃO DE DADOS PARA APEXCHARTS ****
+                # Gráficos
                 apex_charts_series_data_list = []
                 # Converte o índice (datas YYYYMMDD) para objetos datetime para obter timestamps
                 # ou para categorias no formato DD/MM/AAAA
@@ -94,8 +94,7 @@ def index(request):
                         series_points = []
                         for idx, value in enumerate(df[friendly_name]):
                             if pd.notna(value) and (value != -999 and value != -999.0):
-                                # Para ApexCharts, o eixo X pode ser uma categoria (DD/MM/AAAA) ou timestamp
-                                # Usaremos a data formatada DD/MM/AAAA como categoria no eixo X
+                                # Data formatada DD/MM/AAAA como categoria no eixo X
                                 series_points.append({
                                     "x": date_index_dt[idx].strftime("%d/%m/%Y"), 
                                     "y": float(value)
@@ -116,7 +115,6 @@ def index(request):
                 context["apex_charts_data_for_template_loop"] = apex_charts_series_data_list
                 # Passa a STRING JSON para o JavaScript usar para os dados dos gráficos
                 context["apex_chart_data_json"] = json.dumps(apex_charts_series_data_list)
-                # print("DEBUG: apex_chart_data_json:", context["apex_chart_data_json"])
 
                 # Prepara dados para a tabela
                 table_columns_ordered = ["Data_Para_Tabela"] + [
@@ -215,7 +213,7 @@ def hourly_data_view(request):
                 # Formata o índice de data e hora
                 date_index_dt = pd.to_datetime(df.index, format="%Y%m%d%H")
                 
-                # **** INÍCIO DA LÓGICA DE GRÁFICOS ADICIONADA ****
+                # Gráficos
                 apex_charts_series_data_list = []
                 for api_param_name in selected_parameters_api:
                     friendly_name = rename_map.get(api_param_name)
@@ -240,8 +238,7 @@ def hourly_data_view(request):
                 
                 context["apex_charts_data_for_template_loop"] = apex_charts_series_data_list
                 context["apex_chart_data_json"] = json.dumps(apex_charts_series_data_list)
-                # **** FIM DA LÓGICA DE GRÁFICOS ADICIONADA ****
-
+               
                 # Prepara dados para a tabela
                 df["Data e Hora"] = date_index_dt.strftime("%d/%m/%Y %H:%M")
                 table_cols = ["Data e Hora"] + [rename_map.get(p, p) for p in selected_parameters_api if rename_map.get(p,p) in df.columns]
