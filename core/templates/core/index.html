@@ -6,26 +6,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Climad - {{ page_title|default:"Análise Climática" }}</title>
+    
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
+    
     <link rel="stylesheet" href="{% static "css/style.css" %}">
 </head>
 <body>
     <div class="page-wrapper">
         <aside class="sidebar">
             <div class="sidebar-header">
-                <h1>CLIMAD</h1>
+                <h1>Climad 🌦️</h1>
             </div>
             <nav class="sidebar-nav">
-                <a href="{% url 'daily_data' %}" class="nav-link active">Dados Diários</a>
-                <a href="{% url 'hourly_data' %}" class="nav-link">Dados Horários</a>
+                <a href="#" class="nav-link active">Análise de Dados</a>
             </nav>
         </aside>
 
         <main class="main-content">
             <div class="container">
-                <h2>{{ page_title }}</h2>
                 <p class="subtitle page-description">Selecione a localização, período e as variáveis climáticas desejadas para uma análise detalhada.</p>
+
                 <form method="post" class="climad-form">
                     {% csrf_token %}
                     <fieldset class="form-section">
@@ -106,18 +107,7 @@
                                 </tbody>
                             </table>
                         </div>
-
-                        <div id="charts-container-apex" class="charts-wrapper-apex">
-                            {% if apex_charts_data_for_template_loop %}
-                                {% for series_info in apex_charts_data_for_template_loop %}
-                                    <div class="chart-card-apex">
-                                        <h4>{{ series_info.name }}</h4>
-                                        <div id="apexchart-{{ forloop.counter }}"></div> 
-                                    </div>
-                                {% endfor %}
-                            {% endif %}
                         </div>
-                    </div>
                 {% endif %}
             </div>
         </main>
@@ -128,12 +118,6 @@
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script> 
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    {% if apex_chart_data_json %}
-    <script id="apex-chart-data-script" type="application/json">
-        {{ apex_chart_data_json|safe }}
-    </script>
-    {% endif %}
     <script src="{% static "js/main.js" %}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key={{ Maps_api_key }}&callback=initMap" async defer></script>
 </body>

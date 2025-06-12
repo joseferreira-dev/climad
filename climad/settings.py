@@ -131,3 +131,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Chave da API do Google Maps lida a partir do ficheiro .env
 MAPS_API_KEY = config("Maps_API_KEY")
+# Chave da API do OpenWeather lida a partir do ficheiro .env
+OPENWEATHER_API_KEY = config("OPENWEATHER_API_KEY")

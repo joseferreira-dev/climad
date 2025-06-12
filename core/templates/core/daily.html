@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container">
     <h2>{{ page_title }}</h2>
-    <p class="subtitle page-description">Selecione a localização, período (máx. 366 dias) e as variáveis climáticas desejadas.</p>
+    <p class="subtitle page-description">Selecione a localização, período e as variáveis climáticas desejadas para uma análise detalhada.</p>
 
     <form method="post" class="climad-form">
         {% csrf_token %}
@@ -43,23 +43,29 @@
             <legend>Variáveis Climáticas</legend>
             <div class="checkbox-grid">
                 {% with current_selected_params=form_selected_parameters %}
+                <label><input type="checkbox" name="parameters" value="ALLSKY_SFC_SW_DWN" {% if "ALLSKY_SFC_SW_DWN" in current_selected_params %}checked{% endif %}> Radiação Solar</label>
                 <label><input type="checkbox" name="parameters" value="T2M" {% if "T2M" in current_selected_params %}checked{% endif %}> Temperatura</label>
                 <label><input type="checkbox" name="parameters" value="RH2M" {% if "RH2M" in current_selected_params %}checked{% endif %}> Umidade</label>
                 <label><input type="checkbox" name="parameters" value="WS10M" {% if "WS10M" in current_selected_params %}checked{% endif %}> Vento</label>
+                <label><input type="checkbox" name="parameters" value="PRECTOT" {% if "PRECTOT" in current_selected_params %}checked{% endif %}> Precipitação</label>
                 <label><input type="checkbox" name="parameters" value="PS" {% if "PS" in current_selected_params %}checked{% endif %}> Pressão</label>
                 {% endwith %}
             </div>
         </fieldset>
 
-        <button type="submit" class="submit-button">Buscar Dados Horários</button>
+        <button type="submit" class="submit-button">Buscar Dados Diários</button>
 
-        {% if error %}<div class="form-error">{{ error }}</div>{% endif %}
+        {% if error %}
+            <div class="form-error">
+                {{ error }}
+            </div>
+        {% endif %}
     </form>
 
     {% if table_data %}
         <div class="results">
             <h2>Resultados para Latitude: {{ latitude }}, Longitude: {{ longitude }}</h2>
-            <h3>Dados horários de {{ start_date_formatted }} a {{ end_date_formatted }}</h3>
+            <h3>Dados diários de {{ start_date_formatted }} a {{ end_date_formatted }}</h3>
             <div style="overflow-x:auto;">
                 <table id="climate-table" class="display compact stripe hover" style="width:100%">
                     <thead>

@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climad - {{ page_title|default:"Análise Climática" }}</title>
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
+    
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+</head>
+<body>
+    <div class="page-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>Climad 🌦️</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-section-title">Tempo Real</span>
+                    <a href="{% url 'real_time_data' %}" class="nav-link {% if request.resolver_match.url_name == 'real_time_data' %}active{% endif %}">Painel Atual</a>
+                </div>
+                <div class="nav-section">
+                    <span class="nav-section-title">Dados Históricos</span>
+                    <a href="{% url 'daily_data' %}" class="nav-link {% if request.resolver_match.url_name == 'daily_data' %}active{% endif %}">Análise Diária</a>
+                    <a href="{% url 'hourly_data' %}" class="nav-link {% if request.resolver_match.url_name == 'hourly_data' %}active{% endif %}">Análise Horária</a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script> 
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    
+    {% if apex_chart_data_json %}
+    <script id="apex-chart-data-script" type="application/json">
+        {{ apex_chart_data_json|safe }}
+    </script>
+    {% endif %}
+
+    <script src="{% static "js/main.js" %}"></script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ Maps_api_key }}&callback=initMap" async defer></script>
+</body>
+</html>
