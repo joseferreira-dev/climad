@@ -57,14 +57,22 @@ body {
     display: block;
     color: #94a3b8; /* Cor de link mais clara */
     text-decoration: none;
-    padding: 0.8em 0;
+    padding: 0.8em 1em;
+    margin: 0.2em 0;
     border-radius: 6px;
     transition: background-color 0.2s, color 0.2s;
     font-size: 1.05em;
+    font-weight: 500;
 }
 .sidebar-nav a:hover {
     background-color: #334155; /* Fundo no hover */
     color: #ffffff;
+}
+
+.sidebar-nav a.active {
+    background-color: #2563eb; /* Cor de destaque (azul) */
+    color: #ffffff;
+    font-weight: 700;
 }
 
 .main-content {
