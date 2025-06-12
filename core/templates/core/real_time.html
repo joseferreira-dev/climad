@@ -44,33 +44,40 @@
             <h3>{{ real_time_data.descricao }} | Observado em: {{ real_time_data.observado_em }}</h3>
             
             <div class="real-time-cards-grid">
+                
                 <div class="data-card main-temp">
-                    <span class="card-title">Temperatura</span>
-                    <span class="card-value">{{ real_time_data.temperatura|floatformat:1 }}°C</span>
-                    <span class="card-subtitle">Sensação: {{ real_time_data.sensacao_termica|floatformat:1 }}°C</span>
-                    <span class="card-subtitle">Mín: {{ real_time_data.temp_min|floatformat:1 }}°C / Máx: {{ real_time_data.temp_max|floatformat:1 }}°C</span>
+                    <span class="card-title">Temperatura (°C)</span> 
+                    <span class="card-value">{{ real_time_data.temperatura|floatformat:2 }}</span>
+                    <span class="card-subtitle">Sensação: {{ real_time_data.sensacao_termica|floatformat:2 }}°C</span>
+                    <span class="card-subtitle">Mín: {{ real_time_data.temp_min|floatformat:2 }}°C / Máx: {{ real_time_data.temp_max|floatformat:2 }}°C</span>
                 </div>
+
                 <div class="data-card">
-                    <span class="card-title">Umidade</span>
-                    <span class="card-value">{{ real_time_data.umidade }}%</span>
+                    <span class="card-title">Umidade (%)</span>
+                    <span class="card-value">{{ real_time_data.umidade }}</span>
                 </div>
+
                 <div class="data-card">
-                    <span class="card-title">Vento</span>
-                    <span class="card-value">{{ real_time_data.vento_velocidade|floatformat:1 }} km/h</span>
+                    <span class="card-title">Vento (km/h)</span>
+                    <span class="card-value">{{ real_time_data.vento_velocidade|floatformat:2 }}</span>
                     <span class="card-subtitle">Direção: {{ real_time_data.vento_direcao }}°</span>
                 </div>
+
                 <div class="data-card">
-                    <span class="card-title">Pressão Atmosférica</span>
-                    <span class="card-value">{{ real_time_data.pressao }} hPa</span>
+                    <span class="card-title">Pressão (hPa)</span>
+                    <span class="card-value">{{ real_time_data.pressao }}</span>
                 </div>
-                 <div class="data-card">
-                    <span class="card-title">Cobertura de Nuvens</span>
-                    <span class="card-value">{{ real_time_data.nuvens }}%</span>
-                </div>
+
                 <div class="data-card">
-                    <span class="card-title">Visibilidade</span>
-                    <span class="card-value">{{ real_time_data.visibilidade|floatformat:1 }} km</span>
+                    <span class="card-title">Cobertura de Nuvens (%)</span>
+                    <span class="card-value">{{ real_time_data.nuvens }}</span>
                 </div>
+
+                <div class="data-card">
+                    <span class="card-title">Visibilidade (km)</span>
+                    <span class="card-value">{{ real_time_data.visibilidade|floatformat:2 }}</span>
+                </div>
+
                 <div class="data-card small-card">
                     <span class="card-title">Nascer do Sol</span>
                     <span class="card-value small-value">{{ real_time_data.nascer_sol }}</span>
@@ -79,6 +86,7 @@
                     <span class="card-title">Pôr do Sol</span>
                     <span class="card-value small-value">{{ real_time_data.por_sol }}</span>
                 </div>
+
             </div>
         </div>
     {% endif %}

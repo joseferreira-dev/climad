@@ -10,7 +10,7 @@ from django.utils.text import slugify
 
 # --- VIEW PARA DADOS DIÁRIOS (HISTÓRICOS) ---
 def daily_data_view(request):
-    context = {"page_title": "Análise de Dados Diários"}
+    context = {"page_title": "Dados Históricos Diários"}
     context["Maps_api_key"] = settings.MAPS_API_KEY
 
     if request.method == "GET":
@@ -103,7 +103,7 @@ def daily_data_view(request):
 def hourly_data_view(request):
     context = {}
     context["Maps_api_key"] = settings.MAPS_API_KEY
-    context["page_title"] = "Análise de Dados Horários"
+    context["page_title"] = "Dados Históricos Horários"
 
     if request.method == "GET":
         today = date.today()
@@ -203,7 +203,7 @@ def hourly_data_view(request):
 def real_time_view(request):
     context = {}
     context["Maps_api_key"] = settings.MAPS_API_KEY
-    context["page_title"] = "Dados em Tempo Real (OpenWeather)"
+    context["page_title"] = "Dados em Tempo Real"
     
     if request.method == "POST":
         latitude = request.POST.get("latitude")
