@@ -17,10 +17,13 @@
         <fieldset class="form-section">
             <legend>Variáveis Climáticas</legend>
             <div class="checkbox-grid">
-                <label><input type="checkbox" name="parameters" value="T2M"> Temperatura</label>
-                <label><input type="checkbox" name="parameters" value="RH2M"> Umidade</label>
-                <label><input type="checkbox" name="parameters" value="WS10M"> Vento</label>
-                <label><input type="checkbox" name="parameters" value="PS"> Pressão</label>
+                <label><input type="checkbox" name="parameters" value="T2M"> Temperatura a 2m</label>
+                <label><input type="checkbox" name="parameters" value="RH2M"> Umidade Relativa a 2m</label>
+                <label><input type="checkbox" name="parameters" value="WS10M"> Velocidade do Vento a 10m</label>
+                <label><input type="checkbox" name="parameters" value="WD10M"> Direção do Vento a 10m</label>
+                <label><input type="checkbox" name="parameters" value="PS"> Pressão Superficial</label>
+                <label><input type="checkbox" name="parameters" value="PRECTOTCORR"> Precipitação Corrigida</label>
+                <label><input type="checkbox" name="parameters" value="ALLSKY_SFC_SW_DWN"> Radiação Solar</label>
             </div>
         </fieldset>
         <button type="submit" class="submit-button">Buscar Dados Horários</button>
@@ -29,7 +32,15 @@
     
     <div class="results" style="display: none;">
         <h2>Resultados da Análise</h2>
-        <div style="overflow-x:auto;"><table id="climate-table" class="display compact stripe hover" style="width:100%"></table></div>
+        
+        <div class="table-toggle-container">
+            <button id="toggle-table-btn" class="button-secondary">Mostrar/Ocultar Tabela de Dados</button>
+        </div>
+        
+        <div id="table-container" style="display: none;">
+            <div id="table-wrapper"></div>
+        </div>
+        
         <div id="charts-container-apex" class="charts-wrapper-apex"></div>
     </div>
 </div>

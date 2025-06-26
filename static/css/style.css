@@ -356,3 +356,193 @@ table.dataTable tbody tr:hover { background-color: #f0f9ff; }
 .data-card.small-card .card-value {
     font-size: 2em;
 }
+
+/* ESTILOS PARA A NOVA PÁGINA INICIAL */
+.home-container {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3em;
+    padding: 3em 2em;
+    background: linear-gradient(to right, #ffffff, #f0f4f8);
+    border-radius: 12px;
+}
+
+.hero-text {
+    flex: 1;
+}
+
+.hero-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 3.5em;
+    font-weight: 700;
+    color: #1e40af;
+    line-height: 1.1;
+    margin-bottom: 0.3em;
+}
+
+.hero-subtitle {
+    font-size: 1.5em;
+    font-weight: 400;
+    color: #3b82f6;
+    margin-bottom: 1em;
+}
+
+.hero-description {
+    font-size: 1.1em;
+    color: #475569;
+    max-width: 550px;
+    margin-bottom: 2em;
+}
+
+.hero-cta .button-primary {
+    font-size: 1.2em;
+    padding: 0.8em 2em;
+}
+
+.hero-image-container {
+    flex: 0.8;
+}
+
+.hero-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.features-section {
+    margin-top: 4em;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.2em;
+    color: #1e40af;
+    margin-bottom: 1.5em;
+}
+
+.hero-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2em;
+}
+
+.hero-card {
+    background: #ffffff;
+    padding: 2.5em 2em;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    text-align: left;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.hero-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}
+
+.card-icon {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+.hero-card h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5em;
+    color: #1e293b;
+    margin-bottom: 0.5em;
+}
+
+.hero-card p {
+    color: #475569;
+    margin-bottom: 1.5em;
+}
+
+.card-link {
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.card-link:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+.home-link {
+    text-decoration: none;
+}
+
+/* ... (todo o seu css existente) ... */
+
+/* ESTILOS PARA A NOVA TABELA GRID.JS */
+.gridjs-container {
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.gridjs-table {
+    width: 100%;
+}
+
+.gridjs-thead .gridjs-th {
+    background-color: #f8fafc;
+    color: #334155;
+    font-weight: 600;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    border: none;
+    border-bottom: 2px solid #e2e8f0;
+    padding: 1em 1.2em;
+}
+
+.gridjs-tbody .gridjs-td {
+    padding: 0.9em 1.2em;
+    border-color: #f1f5f9;
+}
+
+.gridjs-tr:hover .gridjs-td {
+    background-color: #f0f9ff;
+}
+
+.gridjs-footer {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 1em;
+}
+
+.gridjs-pagination .gridjs-button {
+    background-color: #ffffff;
+    border: 1px solid #cbd5e0;
+    color: #334155;
+    font-weight: 600;
+}
+
+.gridjs-pagination .gridjs-button:hover, .gridjs-pagination .gridjs-currentPage {
+    background-color: #2563eb;
+    color: white;
+    border-color: #2563eb;
+}
+
+/* ... (todo o seu css existente) ... */
+
+/* ESTILOS PARA O BOTÃO DE VISIBILIDADE DA TABELA */
+.table-toggle-container {
+    margin-bottom: 1.5em;
+    padding-bottom: 1.5em;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+#toggle-table-btn {
+    font-size: 1em;
+    font-weight: 500;
+}

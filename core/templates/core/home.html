@@ -4,24 +4,42 @@
 {% block content %}
 <div class="container home-container">
     <div class="hero-section">
-        <h1 class="hero-title">Bem-vindo ao Climad</h1>
-        <p class="hero-subtitle">Sua plataforma completa para análise de dados climáticos e meteorológicos.</p>
-        <p class="hero-description">Utilize nossas ferramentas para obter dados históricos diários, horários e informações em tempo real de fontes confiáveis como a NASA POWER e OpenWeatherMap. Selecione uma das opções de análise no menu lateral para começar.</p>
+        <div class="hero-text">
+            <h1 class="hero-title">Climad</h1>
+            <p class="hero-subtitle">Análise Climática Inteligente ao seu Alcance</p>
+            <p class="hero-description">
+                Explore, analise e visualize dados meteorológicos de fontes globais confiáveis.
+                Nossa plataforma integra informações da NASA, OpenWeatherMap e mais, para fornecer insights precisos para agricultura, pesquisa e planejamento.
+            </p>
+            <div class="hero-cta">
+                <a href="{% url 'core:daily' %}" class="button-primary">Começar Análise &rarr;</a>
+            </div>
+        </div>
+        <div class="hero-image-container">
+            <img src="{% static 'images/hero-image.svg' %}" alt="Análise de Dados Climáticos" class="hero-image">
+        </div>
+    </div>
+
+    <div class="features-section">
+        <h2 class="section-title">Nossas Ferramentas</h2>
         <div class="hero-cards">
             <div class="hero-card">
+                <div class="card-icon">📊</div>
                 <h3>Análise Diária</h3>
                 <p>Visualize dados consolidados de temperatura, precipitação, radiação solar e mais, para qualquer local e período.</p>
-                <a href="{% url 'core:daily' %}" class="button-primary">Acessar</a>
+                <a href="{% url 'core:daily' %}" class="card-link">Acessar Ferramenta</a>
             </div>
             <div class="hero-card">
+                <div class="card-icon">🕒</div>
                 <h3>Análise Horária</h3>
                 <p>Explore a variação horária das condições climáticas para planejamentos de curto prazo e análises detalhadas.</p>
-                <a href="{% url 'core:hourly' %}" class="button-primary">Acessar</a>
+                <a href="{% url 'core:hourly' %}" class="card-link">Acessar Ferramenta</a>
             </div>
             <div class="hero-card">
+                <div class="card-icon">⚡️</div>
                 <h3>Tempo Real</h3>
                 <p>Obtenha as condições meteorológicas atuais para qualquer ponto do globo, com dados atualizados constantemente.</p>
-                <a href="{% url 'core:real_time' %}" class="button-primary">Acessar</a>
+                <a href="{% url 'core:real_time' %}" class="card-link">Acessar Ferramenta</a>
             </div>
         </div>
     </div>
