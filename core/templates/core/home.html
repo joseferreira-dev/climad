@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container home-container">
+    <div class="hero-section">
+        <h1 class="hero-title">Bem-vindo ao Climad</h1>
+        <p class="hero-subtitle">Sua plataforma completa para análise de dados climáticos e meteorológicos.</p>
+        <p class="hero-description">Utilize nossas ferramentas para obter dados históricos diários, horários e informações em tempo real de fontes confiáveis como a NASA POWER e OpenWeatherMap. Selecione uma das opções de análise no menu lateral para começar.</p>
+        <div class="hero-cards">
+            <div class="hero-card">
+                <h3>Análise Diária</h3>
+                <p>Visualize dados consolidados de temperatura, precipitação, radiação solar e mais, para qualquer local e período.</p>
+                <a href="{% url 'core:daily' %}" class="button-primary">Acessar</a>
+            </div>
+            <div class="hero-card">
+                <h3>Análise Horária</h3>
+                <p>Explore a variação horária das condições climáticas para planejamentos de curto prazo e análises detalhadas.</p>
+                <a href="{% url 'core:hourly' %}" class="button-primary">Acessar</a>
+            </div>
+            <div class="hero-card">
+                <h3>Tempo Real</h3>
+                <p>Obtenha as condições meteorológicas atuais para qualquer ponto do globo, com dados atualizados constantemente.</p>
+                <a href="{% url 'core:real_time' %}" class="button-primary">Acessar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

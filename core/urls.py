@@ -1,11 +1,16 @@
+# core/urls.py
+
 from django.urls import path
 from . import views
 
+app_name = "core"
+
 urlpatterns = [
-    # A rota raiz para a view de tempo real
-    path('', views.real_time_view, name='real_time_data'), 
+    # A URL raiz agora aponta para a página de apresentação
+    path("", views.home_view, name="home"), 
     
-    # Rotas para os dados históricos
-    path('historico/diario/', views.daily_data_view, name='daily_data'), 
-    path('historico/horario/', views.hourly_data_view, name='hourly_data'),
+    # Mapeia as URLs específicas para cada tipo de análise
+    path("diaria/", views.daily_view, name="daily"),
+    path("horaria/", views.hourly_view, name="hourly"),
+    path("tempo-real/", views.real_time_view, name="real_time"),
 ]

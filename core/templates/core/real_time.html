@@ -3,92 +3,22 @@
 
 {% block content %}
 <div class="container">
-    <h2>{{ page_title }}</h2>
+    <h2>Análise em Tempo Real</h2>
     <p class="subtitle page-description">Selecione uma localização no mapa para ver as condições meteorológicas atuais.</p>
 
-    <form method="post" class="climad-form">
+    <form id="real-time-analysis-form" class="climad-form">
         {% csrf_token %}
         <fieldset class="form-section">
             <legend>Localização</legend>
-            <div class="map-search-wrapper">
-                <input type="text" id="map-search-input" placeholder="Pesquisar local ou endereço no mapa...">
-                <button type="button" id="map-search-button" class="button-secondary">Pesquisar</button>
-            </div>
-            <div id="map"></div> 
-            <div class="form-grid" style="margin-top: 1em;">
-                <div class="input-pair">
-                    <div class="form-group">
-                        <label for="latitude-input">Latitude</label>
-                        <input type="text" id="latitude-input" name="latitude" placeholder="Clique no mapa para selecionar" value="{{ latitude|default_if_none:'' }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="longitude-input">Longitude</label>
-                        <input type="text" id="longitude-input" name="longitude" placeholder="Clique no mapa para selecionar" value="{{ longitude|default_if_none:'' }}" required>
-                    </div>
-                </div>
-            </div>
+            <div class="map-search-wrapper"><input type="text" id="map-search-input" placeholder="Pesquisar local ou endereço no mapa..."><button type="button" id="map-search-button" class="button-secondary">Pesquisar</button></div>
+            <div id="map"></div>
+            <div class="form-grid" style="margin-top: 1em;"><div class="input-pair"><div class="form-group"><label for="latitude-input">Latitude</label><input type="text" id="latitude-input" name="latitude" required></div><div class="form-group"><label for="longitude-input">Longitude</label><input type="text" id="longitude-input" name="longitude" required></div></div></div>
         </fieldset>
-
         <button type="submit" class="submit-button">Buscar Dados Atuais</button>
-
-        {% if error %}
-            <div class="form-error">
-                {{ error }}
-            </div>
-        {% endif %}
+        <div class="form-error" style="display: none;"></div>
     </form>
-
-    {% if real_time_data %}
-        <div class="results">
-            <h2>Condições Atuais para Latitude: {{ latitude }}, Longitude: {{ longitude }}</h2>
-            <h3>{{ real_time_data.descricao }} | Observado em: {{ real_time_data.observado_em }}</h3>
-            
-            <div class="real-time-cards-grid">
-                
-                <div class="data-card main-temp">
-                    <span class="card-title">Temperatura (°C)</span> 
-                    <span class="card-value">{{ real_time_data.temperatura|floatformat:2 }}</span>
-                    <span class="card-subtitle">Sensação: {{ real_time_data.sensacao_termica|floatformat:2 }}°C</span>
-                    <span class="card-subtitle">Mín: {{ real_time_data.temp_min|floatformat:2 }}°C / Máx: {{ real_time_data.temp_max|floatformat:2 }}°C</span>
-                </div>
-
-                <div class="data-card">
-                    <span class="card-title">Umidade (%)</span>
-                    <span class="card-value">{{ real_time_data.umidade }}</span>
-                </div>
-
-                <div class="data-card">
-                    <span class="card-title">Vento (km/h)</span>
-                    <span class="card-value">{{ real_time_data.vento_velocidade|floatformat:2 }}</span>
-                    <span class="card-subtitle">Direção: {{ real_time_data.vento_direcao }}°</span>
-                </div>
-
-                <div class="data-card">
-                    <span class="card-title">Pressão (hPa)</span>
-                    <span class="card-value">{{ real_time_data.pressao }}</span>
-                </div>
-
-                <div class="data-card">
-                    <span class="card-title">Cobertura de Nuvens (%)</span>
-                    <span class="card-value">{{ real_time_data.nuvens }}</span>
-                </div>
-
-                <div class="data-card">
-                    <span class="card-title">Visibilidade (km)</span>
-                    <span class="card-value">{{ real_time_data.visibilidade|floatformat:2 }}</span>
-                </div>
-
-                <div class="data-card small-card">
-                    <span class="card-title">Nascer do Sol</span>
-                    <span class="card-value small-value">{{ real_time_data.nascer_sol }}</span>
-                </div>
-                <div class="data-card small-card">
-                    <span class="card-title">Pôr do Sol</span>
-                    <span class="card-value small-value">{{ real_time_data.por_sol }}</span>
-                </div>
-
-            </div>
+    
+    <div class="results" style="display: none;">
         </div>
-    {% endif %}
 </div>
 {% endblock %}
