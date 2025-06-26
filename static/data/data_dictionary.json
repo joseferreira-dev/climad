@@ -1,0 +1,247 @@
+[
+  {
+    "parametro": "Temperatura a 2 Metros",
+    "codigo": "T2M",
+    "descricao": "A temperatura média do ar (bulbo seco) a 2 metros acima da superfície da Terra.",
+    "unidade_horaria": "Graus Celsius (°C)",
+    "unidade_diaria": "Graus Celsius (°C)"
+  },
+  {
+    "parametro": "Umidade Relativa a 2 Metros",
+    "codigo": "RH2M",
+    "descricao": "A razão entre a pressão de vapor e a pressão de vapor de saturação em relação a uma superfície plana de água pura, expressa em porcentagem.",
+    "unidade_horaria": "Porcentagem (%)",
+    "unidade_diaria": "Porcentagem (%)"
+  },
+  {
+    "parametro": "Velocidade do Vento a 2 Metros",
+    "codigo": "WS2M",
+    "descricao": "A velocidade média do vento a 2 metros acima da superfície terrestre. (Aviso: A velocidade do vento é fornecida a partir de uma média de uma grande área e pode não representar um local pontual).",
+    "unidade_horaria": "Metros por Segundo (m/s)",
+    "unidade_diaria": "Metros por Segundo (m/s)"
+  },
+  {
+    "parametro": "Ponto de Orvalho/Geada a 2 Metros",
+    "codigo": "T2MDEW",
+    "descricao": "A temperatura do ponto de orvalho/geada a 2 metros acima da superfície da Terra.",
+    "unidade_horaria": "Graus Celsius (°C)",
+    "unidade_diaria": "Graus Celsius (°C)"
+  },
+  {
+    "parametro": "Pressão Superficial",
+    "codigo": "PS",
+    "descricao": "A pressão atmosférica na superfície da Terra.",
+    "unidade_horaria": "Kilopascal (kPa)",
+    "unidade_diaria": "Kilopascal (kPa)"
+  },
+  {
+    "parametro": "Temperatura de Bulbo Úmido a 2 Metros",
+    "codigo": "T2MWET",
+    "descricao": "A temperatura de saturação adiabática que pode ser medida por um termômetro coberto por um pano embebido em água, sobre o qual o ar passa a 2 metros acima da superfície.",
+    "unidade_horaria": "Graus Celsius (°C)",
+    "unidade_diaria": "Graus Celsius (°C)"
+  },
+  {
+    "parametro": "Velocidade do Vento a 50 Metros",
+    "codigo": "WS50M",
+    "descricao": "A velocidade média do vento a 50 metros acima da superfície terrestre. (Aviso: A velocidade do vento é fornecida a partir de uma média de uma grande área).",
+    "unidade_horaria": "Metros por Segundo (m/s)",
+    "unidade_diaria": "Metros por Segundo (m/s)"
+  },
+  {
+    "parametro": "Direção do Vento a 50 Metros",
+    "codigo": "WD50M",
+    "descricao": "A direção média do vento a 50 metros acima da superfície da Terra.",
+    "unidade_horaria": "Graus (°)",
+    "unidade_diaria": "Graus (°)"
+  },
+  {
+    "parametro": "Direção do Vento a 2 Metros",
+    "codigo": "WD2M",
+    "descricao": "A direção média do vento a 2 metros acima da superfície da Terra.",
+    "unidade_horaria": "Graus (°)",
+    "unidade_diaria": "Graus (°)"
+  },
+  {
+    "parametro": "Irradiância Solar de Onda Curta (Céu Aberto)",
+    "codigo": "ALLSKY_SFC_SW_DWN",
+    "descricao": "A irradiância solar total incidente (direta mais difusa) em um plano horizontal na superfície da Terra sob todas as condições de céu.",
+    "unidade_horaria": "MJ/hora",
+    "unidade_diaria": "MJ/m²/dia"
+  },
+  {
+    "parametro": "Irradiância Difusa de Onda Curta (Céu Aberto)",
+    "codigo": "ALLSKY_SFC_SW_DIFF",
+    "descricao": "A irradiância solar difusa (espalhada) incidente em um plano horizontal na superfície da Terra sob todas as condições de céu.",
+    "unidade_horaria": "MJ/hora",
+    "unidade_diaria": "MJ/m²/dia"
+  },
+  {
+    "parametro": "Irradiância Direta Normal (Céu Aberto)",
+    "codigo": "ALLSKY_SFC_SW_DNI",
+    "descricao": "A irradiância solar direta incidente em um plano horizontal normal (perpendicular) à direção do sol sob todas as condições de céu.",
+    "unidade_horaria": "MJ/hora",
+    "unidade_diaria": "MJ/m²/dia"
+  },
+  {
+    "parametro": "Albedo da Superfície (Céu Aberto)",
+    "codigo": "ALLSKY_SRF_ALB",
+    "descricao": "A taxa de refletividade da superfície da Terra; a razão entre a energia solar refletida pela superfície e a energia solar total incidente.",
+    "unidade_horaria": "Adimensional",
+    "unidade_diaria": "Adimensional"
+  },
+  {
+    "parametro": "Quantidade de Nuvens",
+    "codigo": "CLOUD_AMT",
+    "descricao": "A porcentagem média da quantidade de nuvens durante o período temporal.",
+    "unidade_horaria": "Porcentagem (%)",
+    "unidade_diaria": "Porcentagem (%)"
+  },
+  {
+    "parametro": "Precipitação Corrigida",
+    "codigo": "PRECTOTCORR",
+    "descricao": "A precipitação total média corrigida pelo viés do MERRA-2 na superfície da Terra.",
+    "unidade_horaria": "mm/hora",
+    "unidade_diaria": "mm/dia"
+  },
+  {
+    "parametro": "Irradiância Solar no Topo da Atmosfera",
+    "codigo": "TOA_SW_DWN",
+    "descricao": "A irradiância solar total incidente em um plano horizontal no topo da atmosfera (radiação extraterrestre).",
+    "unidade_horaria": "MJ/hora",
+    "unidade_diaria": "MJ/m²/dia"
+  },
+  {
+    "parametro": "Velocidade do Vento a 10 Metros",
+    "codigo": "WS10M",
+    "descricao": "A velocidade média do vento a 10 metros acima da superfície terrestre. (Aviso: A velocidade do vento é fornecida a partir de uma média de uma grande área).",
+    "unidade_horaria": "Metros por Segundo (m/s)",
+    "unidade_diaria": "Metros por Segundo (m/s)"
+  },
+  {
+    "parametro": "Direção do Vento a 10 Metros",
+    "codigo": "WD10M",
+    "descricao": "A direção média do vento a 10 metros acima da superfície da Terra.",
+    "unidade_horaria": "Graus (°)",
+    "unidade_diaria": "Graus (°)"
+  },
+  {
+    "parametro": "Umidade do Solo no Perfil",
+    "codigo": "GWETPROF",
+    "descricao": "A quantidade de água e vapor de água presente no solo, da superfície até o leito rochoso. Valores variam de 0 (seco) a 1 (saturado).",
+    "unidade_horaria": "Fração (0-1)",
+    "unidade_diaria": "Fração (0-1)"
+  },
+  {
+    "parametro": "Temperatura da Superfície da Terra",
+    "codigo": "TS",
+    "descricao": "A temperatura média na superfície da Terra.",
+    "unidade_horaria": "Graus Celsius (°C)",
+    "unidade_diaria": "Graus Celsius (°C)"
+  },
+  {
+    "parametro": "Radiação Fotossinteticamente Ativa (PAR)",
+    "codigo": "ALLSKY_SFC_PAR_TOT",
+    "descricao": "A Radiação Fotossinteticamente Ativa (PAR) total (direta mais difusa) incidente em um plano horizontal na superfície da Terra.",
+    "unidade_horaria": "MJ/hora",
+    "unidade_diaria": "MJ/m²/dia"
+  },
+  {
+    "parametro": "Umidade Específica a 2 Metros",
+    "codigo": "QV2M",
+    "descricao": "A razão entre a massa de vapor de água e a massa total de ar a 2 metros.",
+    "unidade_horaria": "g/kg",
+    "unidade_diaria": "g/kg"
+  },
+  {
+    "parametro": "Umidade na Zona Radicular",
+    "codigo": "GWETROOT",
+    "descricao": "A quantidade de água e vapor disponível para as plantas na zona radicular (geralmente os 200 cm superiores do solo).",
+    "unidade_horaria": "Fração (0-1)",
+    "unidade_diaria": "Fração (0-1)"
+  },
+  {
+    "parametro": "Umidade Superficial do Solo",
+    "codigo": "GWETTOP",
+    "descricao": "A quantidade de água e vapor de água presente nos 5 cm superiores do solo.",
+    "unidade_horaria": "Fração (0-1)",
+    "unidade_diaria": "Fração (0-1)"
+  },
+  {
+    "parametro": "Evaporação em Terra",
+    "codigo": "EVLAND",
+    "descricao": "A evaporação sobre a terra na superfície da Terra.",
+    "unidade_horaria": "mm/hora",
+    "unidade_diaria": "mm/dia"
+  },
+  {
+    "parametro": "Fluxo de Energia de Evapotranspiração",
+    "codigo": "EVPTRNS",
+    "descricao": "O fluxo de energia de evapotranspiração na superfície da Terra.",
+    "unidade_horaria": "MJ/hora",
+    "unidade_diaria": "MJ/m²/dia"
+  },
+  {
+    "parametro": "Umidade Específica a 10 Metros",
+    "codigo": "QV10M",
+    "descricao": "A razão entre a massa de vapor de água e a massa total de ar a 10 metros.",
+    "unidade_horaria": "g/kg",
+    "unidade_diaria": "g/kg"
+  },
+  {
+    "parametro": "Temperatura a 10 Metros",
+    "codigo": "T10M",
+    "descricao": "A temperatura do ar (bulbo seco) a 10 metros acima da superfície da Terra.",
+    "unidade_horaria": "Graus Celsius (°C)",
+    "unidade_diaria": "Graus Celsius (°C)"
+  },
+  {
+    "parametro": "Pressão ao Nível do Mar",
+    "codigo": "SLP",
+    "descricao": "A pressão ao nível do mar na superfície da Terra.",
+    "unidade_horaria": "Kilopascal (kPa)",
+    "unidade_diaria": "Kilopascal (kPa)"
+  },
+  {
+    "parametro": "Temp. do Solo (Camada 1: 0-10cm)",
+    "codigo": "TSOIL1",
+    "descricao": "A estimativa da temperatura do solo na camada 1, de 0.018 a 0.0988 m de profundidade.",
+    "unidade_horaria": "Graus Celsius (°C)",
+    "unidade_diaria": "Graus Celsius (°C)"
+  },
+  {
+    "parametro": "Temp. do Solo (Camada 2: 10-30cm)",
+    "codigo": "TSOIL2",
+    "descricao": "A estimativa da temperatura do solo na camada 2, de 0.0988 a 0.294 m de profundidade.",
+    "unidade_horaria": "Graus Celsius (°C)",
+    "unidade_diaria": "Graus Celsius (°C)"
+  },
+  {
+    "parametro": "Temp. do Solo (Camada 3: 30-70cm)",
+    "codigo": "TSOIL3",
+    "descricao": "A estimativa da temperatura do solo na camada 3, de 0.294 a 0.6799 m de profundidade.",
+    "unidade_horaria": "Graus Celsius (°C)",
+    "unidade_diaria": "Graus Celsius (°C)"
+  },
+  {
+    "parametro": "Temp. do Solo (Camada 4: 70-140cm)",
+    "codigo": "TSOIL4",
+    "descricao": "A estimativa da temperatura do solo na camada 4, de 0.6799 a 1.4425 m de profundidade.",
+    "unidade_horaria": "Graus Celsius (°C)",
+    "unidade_diaria": "Graus Celsius (°C)"
+  },
+  {
+    "parametro": "Temp. do Solo (Camada 5: 140-290cm)",
+    "codigo": "TSOIL5",
+    "descricao": "A estimativa da temperatura do solo na camada 5, de 1.4425 a 2.949 m de profundidade.",
+    "unidade_horaria": "Graus Celsius (°C)",
+    "unidade_diaria": "Graus Celsius (°C)"
+  },
+  {
+    "parametro": "Temp. do Solo (Camada 6: 290-1000cm)",
+    "codigo": "TSOIL6",
+    "descricao": "A estimativa da temperatura do solo na camada 6, de 2.949 a 10.0 m de profundidade.",
+    "unidade_horaria": "Graus Celsius (°C)",
+    "unidade_diaria": "Graus Celsius (°C)"
+  }
+]

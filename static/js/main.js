@@ -1,22 +1,46 @@
-// static/js/main.js (VERSÃO FINAL COM TODAS AS CORREÇÕES)
+// static/js/main.js (VERSÃO FINAL COM CORREÇÃO PARA O ERRO 'Assignment to constant variable')
 
 // =================================================================
-// DICIONÁRIO DE TRADUÇÃO E UNIDADES (CORRIGIDO E COMPLETO)
+// DICIONÁRIO DE TRADUÇÃO E UNIDADES
 // =================================================================
 const PARAMETER_MAP = {
-    // Parâmetros Diários e Horários
-    "T2M": { name: "Temperatura Média a 2m", unit: "°C" },
-    "T2M_MAX": { name: "Temperatura Máx. a 2m", unit: "°C" },
-    "T2M_MIN": { name: "Temperatura Mín. a 2m", unit: "°C" },
-    "RH2M": { name: "Umidade Relativa a 2m", unit: "%" },
-    "PRECTOTCORR": { name: "Precipitação", unit: "mm" },
-    "WS10M": { name: "Velocidade do Vento a 10m", unit: "m/s" },
-    "WD10M": { name: "Direção do Vento a 10m", unit: "°" },
-    "PS": { name: "Pressão Superficial", unit: "kPa" },
-    // CORRIGIDO: Chave para Radiação Solar agora é usada para ambos (diário e horário)
-    "ALLSKY_SFC_SW_DWN": { name: "Radiação Solar (Onda Curta)", unit: "kW-hr/m^2" },
-    "ALLSKY_SFC_LW_DWN": { name: "Radiação (Onda Longa)", unit: "kW-hr/m^2/dia" },
-    "CLRSKY_SFC_SW_DWN": { name: "Radiação Solar (Céu Limpo)", unit: "kW-hr/m^2/dia" }
+    "T2M": { name: "Temperatura Média a 2m", unitDaily: "°C", unitHourly: "°C" },
+    "T2M_MAX": { name: "Temperatura Máx. a 2m", unitDaily: "°C", unitHourly: "°C" },
+    "T2M_MIN": { name: "Temperatura Mín. a 2m", unitDaily: "°C", unitHourly: "°C" },
+    "RH2M": { name: "Umidade Relativa a 2m", unitDaily: "%", unitHourly: "%" },
+    "PRECTOTCORR": { name: "Precipitação Corrigida", unitDaily: "mm/dia", unitHourly: "mm/hr" },
+    "WS2M": { name: "Velocidade do Vento a 2m", unitDaily: "m/s", unitHourly: "m/s" },
+    "T2MDEW": { name: "Ponto de Orvalho/Geada a 2m", unitDaily: "°C", unitHourly: "°C" },
+    "PS": { name: "Pressão Superficial", unitDaily: "kPa", unitHourly: "kPa" },
+    "T2MWET": { name: "Temp. de Bulbo Úmido a 2m", unitDaily: "°C", unitHourly: "°C" },
+    "WS50M": { name: "Velocidade do Vento a 50m", unitDaily: "m/s", unitHourly: "m/s" },
+    "WD50M": { name: "Direção do Vento a 50m", unitDaily: "°", unitHourly: "°" },
+    "WD2M": { name: "Direção do Vento a 2m", unitDaily: "°", unitHourly: "°" },
+    "ALLSKY_SFC_SW_DWN": { name: "Irradiância Solar de Onda Curta", unitDaily: "MJ/m²/dia", unitHourly: "MJ/hr" },
+    "ALLSKY_SFC_SW_DIFF": { name: "Irradiância Difusa de Onda Curta", unitDaily: "MJ/m²/dia", unitHourly: "MJ/hr" },
+    "ALLSKY_SFC_SW_DNI": { name: "Irradiância Direta Normal", unitDaily: "MJ/m²/dia", unitHourly: "MJ/hr" },
+    "ALLSKY_SRF_ALB": { name: "Albedo da Superfície", unitDaily: "Adimensional", unitHourly: "Adimensional" },
+    "CLOUD_AMT": { name: "Quantidade de Nuvens", unitDaily: "%", unitHourly: "%" },
+    "TOA_SW_DWN": { name: "Irradiância no Topo da Atmosfera", unitDaily: "MJ/m²/dia", unitHourly: "MJ/hr" },
+    "WS10M": { name: "Velocidade do Vento a 10m", unitDaily: "m/s", unitHourly: "m/s" },
+    "WD10M": { name: "Direção do Vento a 10m", unitDaily: "°", unitHourly: "°" },
+    "GWETPROF": { name: "Umidade do Solo (Perfil)", unitDaily: "Fração (0-1)", unitHourly: "Fração (0-1)" },
+    "TS": { name: "Temperatura da Superfície", unitDaily: "°C", unitHourly: "°C" },
+    "ALLSKY_SFC_PAR_TOT": { name: "Radiação Fotossint. (PAR)", unitDaily: "MJ/m²/dia", unitHourly: "MJ/hr" },
+    "QV2M": { name: "Umidade Específica a 2m", unitDaily: "g/kg", unitHourly: "g/kg" },
+    "GWETROOT": { name: "Umidade na Zona Radicular", unitDaily: "Fração (0-1)", unitHourly: "Fração (0-1)" },
+    "GWETTOP": { name: "Umidade Superficial do Solo", unitDaily: "Fração (0-1)", unitHourly: "Fração (0-1)" },
+    "EVLAND": { name: "Evaporação em Terra", unitDaily: "mm/dia", unitHourly: "mm/hora" },
+    "EVPTRNS": { name: "Fluxo de Evapotranspiração", unitDaily: "MJ/m²/dia", unitHourly: "MJ/hr" },
+    "QV10M": { name: "Umidade Específica a 10m", unitDaily: "g/kg", unitHourly: "g/kg" },
+    "T10M": { name: "Temperatura a 10m", unitDaily: "°C", unitHourly: "°C" },
+    "SLP": { name: "Pressão ao Nível do Mar", unitDaily: "kPa", unitHourly: "kPa" },
+    "TSOIL1": { name: "Temp. do Solo (0-10cm)", unitDaily: "°C", unitHourly: "°C" },
+    "TSOIL2": { name: "Temp. do Solo (10-30cm)", unitDaily: "°C", unitHourly: "°C" },
+    "TSOIL3": { name: "Temp. do Solo (30-70cm)", unitDaily: "°C", unitHourly: "°C" },
+    "TSOIL4": { name: "Temp. do Solo (70-140cm)", unitDaily: "°C", unitHourly: "°C" },
+    "TSOIL5": { name: "Temp. do Solo (140-290cm)", unitDaily: "°C", unitHourly: "°C" },
+    "TSOIL6": { name: "Temp. do Solo (290-1000cm)", unitDaily: "°C", unitHourly: "°C" }
 };
 
 // =================================================================
@@ -140,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const resultsDiv = document.querySelector('.results');
         errorDiv.style.display = 'none';
         resultsDiv.style.display = 'none';
-
+        
         let params = {};
         if (isRealTime) {
             params = { lat: form.querySelector('#latitude-input').value, lon: form.querySelector('#longitude-input').value };
@@ -172,9 +196,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const columnsConfig = [{ id: 'dateKey', name: isHourly ? 'Data/Hora' : 'Data' }];
                 paramKeys.forEach(key => {
-                    const paramInfo = PARAMETER_MAP[key] || { name: key, unit: '' };
-                    let unit = paramInfo.unit;
-                    if (isHourly && key === 'PRECTOTCORR') unit = 'mm/hr'; // Ajuste da unidade para precipitação horária
+                    const paramInfo = PARAMETER_MAP[key] || { name: key, unitDaily: '', unitHourly: '' };
+                    // ========= INÍCIO DA CORREÇÃO =========
+                    // Declara a unidade com 'let' para permitir modificação
+                    let unit = isHourly ? paramInfo.unitHourly : paramInfo.unitDaily;
+                    // ========= FIM DA CORREÇÃO =========
                     const title = `${paramInfo.name} (${unit})`;
                     columnsConfig.push({ id: key, name: title });
                 });
@@ -193,9 +219,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 
                 const chartSeries = paramKeys.map(key => {
-                    const paramInfo = PARAMETER_MAP[key] || { name: key, unit: '' };
-                    let unit = paramInfo.unit;
-                    if (isHourly && key === 'PRECTOTCORR') unit = 'mm/hr';
+                    const paramInfo = PARAMETER_MAP[key] || { name: key, unitDaily: '', unitHourly: '' };
+                    // ========= INÍCIO DA CORREÇÃO =========
+                    // Declara a unidade com 'let' para permitir modificação
+                    let unit = isHourly ? paramInfo.unitHourly : paramInfo.unitDaily;
+                    // ========= FIM DA CORREÇÃO =========
                     const name = `${paramInfo.name} (${unit})`;
                     return {
                         name: name,
@@ -212,7 +240,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderApexCharts(chartSeries);
                 resultsDiv.style.display = 'block';
 
-                // Adiciona o event listener para o novo botão da tabela
                 const toggleBtn = document.getElementById('toggle-table-btn');
                 const tableContainer = document.getElementById('table-container');
                 if (toggleBtn && tableContainer) {

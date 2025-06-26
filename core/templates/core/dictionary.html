@@ -1,0 +1,46 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h2>Dicionário de Dados</h2>
+    <p class="subtitle page-description">Consulte aqui a descrição detalhada e as unidades de cada parâmetro disponível em nossa plataforma.</p>
+
+    <div id="table-wrapper"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Pega os dados que o Django injetou no template
+    const dictionaryData = {{ dictionary_data|safe }};
+
+    // Prepara os dados para o Grid.js
+    const columnsConfig = [
+        { id: 'parametro', name: 'Parâmetro' },
+        { id: 'codigo', name: 'Código API' },
+        { id: 'descricao', name: 'Descrição' },
+        { id: 'unidade_diaria', name: 'Unidade (Diária)' },
+        { id: 'unidade_horaria', name: 'Unidade (Horária)' }
+    ];
+
+    new gridjs.Grid({
+        columns: columnsConfig,
+        data: dictionaryData,
+        search: true,
+        sort: true,
+        pagination: {
+            limit: 15
+        },
+        style: {
+            td: {
+              'white-space': 'normal' // Permite quebra de linha na descrição
+            }
+        },
+        language: {
+            'search': { 'placeholder': '🔍 Pesquisar...' },
+            'pagination': { 'previous': 'Anterior', 'next': 'Próxima', 'showing': 'Mostrando', 'results': () => 'Resultados', 'to': 'a', 'of': 'de' }
+        }
+    }).render(document.getElementById('table-wrapper'));
+});
+</script>
+{% endblock %}
