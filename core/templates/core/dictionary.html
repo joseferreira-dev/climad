@@ -11,10 +11,8 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Pega os dados que o Django injetou no template
     const dictionaryData = {{ dictionary_data|safe }};
 
-    // Prepara os dados para o Grid.js
     const columnsConfig = [
         { id: 'parametro', name: 'Parâmetro' },
         { id: 'codigo', name: 'Código API' },
@@ -33,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         style: {
             td: {
-              'white-space': 'normal' // Permite quebra de linha na descrição
+              'white-space': 'normal'
             }
         },
         language: {

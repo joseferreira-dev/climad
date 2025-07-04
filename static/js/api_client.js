@@ -1,4 +1,3 @@
-// static/js/api_client.js
 async function fetchNasaPowerDaily(params) {
     const apiUrl = new URL('/api/nasa-power/daily/', window.location.origin);
     Object.keys(params).forEach(key => apiUrl.searchParams.append(key, params[key]));

@@ -1,16 +1,11 @@
-/* ==========================================================================
-   Estilo CLIMAD v3 - Design inspirado no CETENE
-   Criado para funcionar com a estrutura HTML existente sem modificações.
-   ========================================================================== */
-
 /* -------------------------------------------------------------------------- */
-/* 1. Variáveis Globais e Reset Básico                                       */
+/* Variáveis Globais e Reset Básico                                           */
 /* -------------------------------------------------------------------------- */
 
 :root {
-  --cetene-blue-dark: #001f3f; /* Azul escuro do rodapé do CETENE */
-  --cetene-blue-primary: #0056b3; /* Azul principal para botões e links */
-  --cetene-blue-light: #f4f6f9; /* Fundo de página (cinza azulado claro) */
+  --cetene-blue-dark: #001f3f;
+  --cetene-blue-primary: #0056b3;
+  --cetene-blue-light: #f4f6f9;
   --text-primary: #333;
   --text-secondary: #555;
   --text-on-dark: #ffffff;
@@ -33,7 +28,7 @@ body {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 2. Estrutura Principal (Sidebar e Conteúdo)                               */
+/* Estrutura Principal                                                        */
 /* -------------------------------------------------------------------------- */
 
 .page-wrapper {
@@ -79,7 +74,7 @@ body {
 .nav-section-title {
   font-size: 0.8em;
   font-weight: bold;
-  color: #8fa7c4; /* Tom de azul acinzentado */
+  color: #8fa7c4;
   text-transform: uppercase;
   letter-spacing: 1px;
   padding: 0 1.5em;
@@ -88,7 +83,7 @@ body {
 
 .nav-link {
   display: block;
-  color: #cdd5e0; /* Tom mais claro para links inativos */
+  color: #cdd5e0;
   text-decoration: none;
   padding: 0.8em 1.5em;
   margin: 0.2em 0;
@@ -116,7 +111,7 @@ body {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 3. Estilos de Conteúdo Comum (Containers, Títulos, Formulários)           */
+/* Estilos de Conteúdo Comum                                                  */
 /* -------------------------------------------------------------------------- */
 
 .container {
@@ -139,7 +134,6 @@ body {
   max-width: 800px;
 }
 
-/* Formulários */
 .climad-form {
   display: flex;
   flex-direction: column;
@@ -160,12 +154,12 @@ legend {
   color: var(--cetene-blue-primary);
   padding: 0 0.8em;
   margin-left: 0.8em;
-  background-color: var(--card-bg); /* Garante que a legenda "corte" a borda */
+  background-color: var(--card-bg);
 }
 
 #map {
   width: 100%;
-  height: 400px; /* Altura garantida para o mapa */
+  height: 400px;
   border-radius: 6px;
   border: 1px solid var(--border-color);
   margin: 1em 0;
@@ -218,7 +212,6 @@ input[type="text"]:focus, input[type="date"]:focus {
   font-size: 0.95rem;
 }
 
-/* Botões */
 .submit-button, .button-secondary, .button-primary {
   padding: 0.8em 1.8em;
   border: none;
@@ -237,12 +230,12 @@ input[type="text"]:focus, input[type="date"]:focus {
   color: var(--text-on-dark);
 }
 .submit-button:hover, .button-primary:hover {
-  background-color: #004494; /* Tom mais escuro */
+  background-color: #004494;
   transform: translateY(-2px);
 }
 
 .button-secondary {
-  background-color: #6c757d; /* Cinza secundário */
+  background-color: #6c757d;
   color: var(--text-on-dark);
 }
 .button-secondary:hover {
@@ -260,10 +253,9 @@ input[type="text"]:focus, input[type="date"]:focus {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 4. Estilos de Páginas Específicas                                         */
+/* Estilos de Páginas Específicas                                             */
 /* -------------------------------------------------------------------------- */
 
-/* ----- Home Page ----- */
 .home-container {
   background: none;
   box-shadow: none;
@@ -307,7 +299,6 @@ input[type="text"]:focus, input[type="date"]:focus {
 .hero-card h3 { font-size: 1.4rem; color: var(--cetene-blue-dark); margin-top: 0.5em;}
 .card-link { font-weight: bold; }
 
-/* ----- Real-Time Page ----- */
 .real-time-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -324,7 +315,7 @@ input[type="text"]:focus, input[type="date"]:focus {
 }
 
 .data-card.main-temp {
-  grid-column: 1 / -1; /* Ocupa a linha toda */
+  grid-column: 1 / -1;
   background-color: var(--cetene-blue-primary);
   color: var(--text-on-dark);
 }
@@ -338,7 +329,7 @@ input[type="text"]:focus, input[type="date"]:focus {
 
 
 /* -------------------------------------------------------------------------- */
-/* 5. Estilos para Bibliotecas (Grid.js)                                     */
+/* Estilos para Bibliotecas                                                   */
 /* -------------------------------------------------------------------------- */
 .results { margin-top: 2.5em; }
 #table-wrapper { margin-top: 1em; }
@@ -350,7 +341,7 @@ input[type="text"]:focus, input[type="date"]:focus {
   border: 1px solid var(--border-color);
 }
 .gridjs-thead .gridjs-th {
-  background-color: #e9ecef; /* Cinza claro para cabeçalho */
+  background-color: #e9ecef;
   color: var(--cetene-blue-dark);
   border: none;
   border-bottom: 2px solid var(--border-color);
@@ -369,7 +360,7 @@ input[type="text"]:focus, input[type="date"]:focus {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 6. Responsividade                                                         */
+/* Responsividade                                                             */
 /* -------------------------------------------------------------------------- */
 
 @media (max-width: 992px) {

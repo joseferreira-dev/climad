@@ -197,10 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const columnsConfig = [{ id: 'dateKey', name: isHourly ? 'Data/Hora' : 'Data' }];
                 paramKeys.forEach(key => {
                     const paramInfo = PARAMETER_MAP[key] || { name: key, unitDaily: '', unitHourly: '' };
-                    // ========= INÍCIO DA CORREÇÃO =========
-                    // Declara a unidade com 'let' para permitir modificação
                     let unit = isHourly ? paramInfo.unitHourly : paramInfo.unitDaily;
-                    // ========= FIM DA CORREÇÃO =========
                     const title = `${paramInfo.name} (${unit})`;
                     columnsConfig.push({ id: key, name: title });
                 });
@@ -220,10 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const chartSeries = paramKeys.map(key => {
                     const paramInfo = PARAMETER_MAP[key] || { name: key, unitDaily: '', unitHourly: '' };
-                    // ========= INÍCIO DA CORREÇÃO =========
-                    // Declara a unidade com 'let' para permitir modificação
                     let unit = isHourly ? paramInfo.unitHourly : paramInfo.unitDaily;
-                    // ========= FIM DA CORREÇÃO =========
                     const name = `${paramInfo.name} (${unit})`;
                     return {
                         name: name,

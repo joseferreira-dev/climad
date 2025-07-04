@@ -19,12 +19,12 @@
             <nav class="sidebar-nav">
                 <div class="nav-section">
                     <span class="nav-section-title">Tempo Real</span>
-                    <a href="{% url 'core:real_time' %}" class="nav-link {% if request.resolver_match.url_name == 'real_time' %}active{% endif %}">Painel Atual</a>
+                    <a href="{% url 'core:real_time' %}" class="nav-link {% if request.resolver_match.url_name == 'real_time' %}active{% endif %}">Dados Atuais</a>
                 </div>
                 <div class="nav-section">
                     <span class="nav-section-title">Dados Históricos</span>
-                    <a href="{% url 'core:daily' %}" class="nav-link {% if request.resolver_match.url_name == 'daily' %}active{% endif %}">Análise Diária</a>
-                    <a href="{% url 'core:hourly' %}" class="nav-link {% if request.resolver_match.url_name == 'hourly' %}active{% endif %}">Análise Horária</a>
+                    <a href="{% url 'core:daily' %}" class="nav-link {% if request.resolver_match.url_name == 'daily' %}active{% endif %}">Dados Diários</a>
+                    <a href="{% url 'core:hourly' %}" class="nav-link {% if request.resolver_match.url_name == 'hourly' %}active{% endif %}">Dados Horários</a>
                 </div>
             </nav>
         </aside>
