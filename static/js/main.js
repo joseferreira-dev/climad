@@ -148,7 +148,45 @@ function renderApexCharts(seriesData) {
 function displayRealTimeResults(data) {
     const resultsContainer = document.querySelector('.results');
     if (!resultsContainer) return;
-    const resultsHtml = `<h2>Condições Atuais em ${data.name}</h2><h3>${data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1)} | Observado em: ${new Date(data.dt * 1000).toLocaleString('pt-BR')}</h3><div class="real-time-cards-grid"><div class="data-card main-temp"><span class="card-title">Temperatura</span><span class="card-value">${data.main.temp.toFixed(1)} °C</span><span class="card-subtitle">Sensação: ${data.main.feels_like.toFixed(1)} °C</span><span class="card-subtitle">Mín: ${data.main.temp_min.toFixed(1)}°C / Máx: ${data.main.temp_max.toFixed(1)}°C</span></div><div class="data-card"><span class="card-title">Umidade</span><span class="card-value">${data.main.humidity} %</span></div><div class="data-card"><span class="card-title">Vento</span><span class="card-value">${(data.wind.speed * 3.6).toFixed(1)} km/h</span><span class="card-subtitle">Direção: ${data.wind.deg}°</span></div><div class="data-card"><span class="card-title">Pressão</span><span class="card-value">${data.main.pressure} hPa</span></div><div class="data-card"><span class="card-title">Nuvens</span><span class="card-value">${data.clouds.all} %</span></div><div class="data-card"><span class="card-title">Visibilidade</span><span class="card-value">${(data.visibility / 1000).toFixed(1)} km</span></div><div class="data-card small-card"><span class="card-title">Nascer do Sol</span><span class="card-value small-value">${new Date(data.sys.sunrise * 1000).toLocaleTimeString('pt-BR')}</span></div><div class="data-card small-card"><span class="card-title">Pôr do Sol</span><span class="card-value small-value">${new Date(data.sys.sunset * 1000).toLocaleTimeString('pt-BR')}</span></div></div>`;
+    const resultsHtml = `<h2>Condições Atuais em ${data.name}</h2>
+    <h3>${data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1)} | Observado em: ${new Date(data.dt * 1000).toLocaleString('pt-BR')}</h3>
+    <div class="real-time-cards-grid">
+        <div class="data-card main-temp">
+            <span class="card-title">Temperatura</span><br>
+            <span class="card-value">${data.main.temp.toFixed(1)} °C</span><br>
+            <span class="card-subtitle">Sensação: ${data.main.feels_like.toFixed(1)} °C</span><br>
+            <span class="card-subtitle">Mín: ${data.main.temp_min.toFixed(1)}°C / Máx: ${data.main.temp_max.toFixed(1)}°C</span>
+        </div>
+        <div class="data-card">
+            <span class="card-title">Umidade</span><br>
+            <span class="card-value">${data.main.humidity.toFixed(1)} %</span>
+        </div>
+        <div class="data-card">
+            <span class="card-title">Vento</span><br>
+            <span class="card-value">${(data.wind.speed * 3.6).toFixed(1)} km/h</span><br>
+            <span class="card-subtitle">Direção: ${data.wind.deg}°</span>
+        </div>
+        <div class="data-card">
+            <span class="card-title">Pressão</span><br>
+            <span class="card-value">${(data.main.pressure/1000).toFixed(3)} kPa</span>
+        </div>
+        <div class="data-card">
+            <span class="card-title">Nuvens</span><br>
+            <span class="card-value">${data.clouds.all.toFixed(1)} %</span>
+        </div>
+        <div class="data-card">
+            <span class="card-title">Visibilidade</span><br>
+            <span class="card-value">${(data.visibility / 1000).toFixed(1)} km</span>
+        </div>
+        <div class="data-card small-card">
+            <span class="card-title">Nascer do Sol</span><br>
+            <span class="card-value small-value">${new Date(data.sys.sunrise * 1000).toLocaleTimeString('pt-BR')}</span>
+        </div>
+        <div class="data-card small-card">
+            <span class="card-title">Pôr do Sol</span><br>
+            <span class="card-value small-value">${new Date(data.sys.sunset * 1000).toLocaleTimeString('pt-BR')}</span>
+        </div>
+    </div>`;
     resultsContainer.innerHTML = resultsHtml;
     resultsContainer.style.display = 'block';
 }

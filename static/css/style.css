@@ -314,19 +314,22 @@ input[type="text"]:focus, input[type="date"]:focus {
   text-align: center;
 }
 
+.data-card .card-title { font-weight: 500; color: var(--text-secondary); }
+.data-card .card-value { font-size: 2rem; font-weight: bold; color: var(--cetene-blue-dark); }
+.data-card .card-subtitle { font-size: 0.9rem; color: #6c757d; }
+
 .data-card.main-temp {
   grid-column: 1 / -1;
   background-color: var(--cetene-blue-primary);
   color: var(--text-on-dark);
 }
 .data-card.main-temp .card-title,
-.data-card.main-temp .card-subtitle { color: rgba(255, 255, 255, 0.8); }
-.data-card.main-temp .card-value { font-size: 3rem; }
+.data-card.main-temp .card-subtitle { color: var(--text-on-dark); }
 
-.data-card .card-title { font-weight: 500; color: var(--text-secondary); }
-.data-card .card-value { font-size: 2rem; font-weight: bold; color: var(--cetene-blue-dark); }
-.data-card .card-subtitle { font-size: 0.9rem; color: #6c757d; }
-
+.data-card.main-temp .card-value {
+  font-size: 3rem;
+  color: var(--text-on-dark);
+}
 
 /* -------------------------------------------------------------------------- */
 /* Estilos para Bibliotecas                                                   */

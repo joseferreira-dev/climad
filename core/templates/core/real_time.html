@@ -10,9 +10,23 @@
         {% csrf_token %}
         <fieldset class="form-section">
             <legend>Localização</legend>
-            <div class="map-search-wrapper"><input type="text" id="map-search-input" placeholder="Pesquisar local ou endereço no mapa..."><button type="button" id="map-search-button" class="button-secondary">Pesquisar</button></div>
+            <div class="map-search-wrapper">
+                <input type="text" id="map-search-input" placeholder="Pesquisar local ou endereço no mapa...">
+                <button type="button" id="map-search-button" class="button-secondary">Pesquisar</button>
+            </div>
             <div id="map"></div>
-            <div class="form-grid" style="margin-top: 1em;"><div class="input-pair"><div class="form-group"><label for="latitude-input">Latitude</label><input type="text" id="latitude-input" name="latitude" required></div><div class="form-group"><label for="longitude-input">Longitude</label><input type="text" id="longitude-input" name="longitude" required></div></div></div>
+            <div class="form-grid" style="margin-top: 1em;">
+                <div class="input-pair">
+                    <div class="form-group">
+                        <label for="latitude-input">Latitude</label>
+                        <input type="text" id="latitude-input" name="latitude" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="longitude-input">Longitude</label>
+                        <input type="text" id="longitude-input" name="longitude" required>
+                    </div>
+                </div>
+            </div>
         </fieldset>
         <button type="submit" class="submit-button">Buscar Dados Atuais</button>
         <div class="form-error" style="display: none;"></div>
