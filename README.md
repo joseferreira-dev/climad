@@ -1,161 +1,149 @@
-# Climad - Plataforma de Análise Climática
+# Climad: Plataforma de Análise Climática Inteligente
 
-Climad é uma aplicação web desenvolvida em Python com o framework Django, projetada para facilitar a coleta, visualização e análise de dados climáticos históricos. O projeto integra dados de fontes confiáveis como a NASA POWER, permitindo que os utilizadores selecionem localizações geográficas (manualmente ou via mapa interativo), períodos de tempo e variáveis climáticas específicas. Os dados são apresentados em tabelas interativas com funcionalidades de exportação (Excel, CSV, JSON) e em gráficos dinâmicos para uma melhor interpretação. 
+Climad é uma aplicação web robusta, desenvolvida com Python e Django, que serve como uma central para coleta, visualização e análise de dados climáticos. A plataforma integra-se com APIs de fontes renomadas como NASA POWER e OpenWeatherMap para fornecer dados históricos e em tempo real. Os usuários podem selecionar localizações geográficas através de um mapa interativo, escolher períodos de tempo e especificar as variáveis climáticas de interesse. Os dados resultantes são exibidos de forma clara em tabelas interativas e gráficos dinâmicos, tornando a ferramenta ideal para pesquisa, agricultura e planejamento.
 
-Este projeto é parte de uma pesquisa de mestrado e visa fornecer uma ferramenta robusta para análise climática, com planos futuros de integração de múltiplas fontes de dados e aplicação de técnicas de machine learning. [cite: 248, 333, 334]
+## 🌟 Funcionalidades Principais
 
-## Funcionalidades Implementadas
-* **Seleção de Localização Interativa:**
-    * Entrada manual de latitude e longitude.
-    * Seleção de coordenadas clicando num mapa Google Maps integrado.
-    * Pesquisa de localizações no mapa por nome/endereço (Geocoding).
-* **Seleção de Período:** Escolha de data de início e fim para a consulta dos dados.
-* **Seleção de Variáveis Climáticas:** Checkboxes para selecionar quais dados da NASA POWER o utilizador deseja visualizar (ex: Temperatura, Precipitação, Radiação Solar, etc.).
-* **Visualização de Dados em Tabela:**
-    * Apresentação dos dados diários numa tabela responsiva e interativa (usando DataTables.net).
-    * Paginação, busca e organização de colunas.
-    * Botões para exportar os dados da tabela para os formatos CSV, Excel e JSON (copiar).
-* **Visualização de Dados em Gráficos:**
-    * Geração de gráficos de linha individuais para cada variável climática selecionada (usando ApexCharts).
-    * Eixos dos gráficos otimizados para legibilidade.
-    * Gráficos responsivos.
-* **Valores Padrão no Formulário:**
-    * Datas pré-preenchidas (último mês até hoje).
-    * Todas as variáveis climáticas marcadas por padrão no primeiro carregamento.
-* **Design Moderno e Responsivo:** Interface de utilizador desenhada para ser clara, simples e adaptável a diferentes tamanhos de ecrã.
-* **Gestão Segura de Chaves de API:** Uso de variáveis de ambiente (`.env` file) para a chave da API do Google Maps.
+  * **Três Modos de Análise:**
+      * **Dados em Tempo Real:** Obtém as condições meteorológicas atuais para qualquer local do globo usando a API da OpenWeatherMap.
+      * **Análise de Dados Diários:** Consulta dados históricos diários da API NASA POWER para um intervalo de datas selecionado.
+      * **Análise de Dados Horários:** Consulta dados históricos horários da API NASA POWER para uma análise mais granular.
+  * **Seleção de Localização Interativa:**
+      * Interface de mapa (Google Maps) para selecionar coordenadas com um clique.
+      * Funcionalidade de geocodificação para pesquisar locais por endereço ou nome.
+      * Entrada manual de latitude e longitude.
+  * **Ampla Seleção de Variáveis:** Formulários completos que permitem ao usuário selecionar múltiplas variáveis climáticas para análise, como temperatura, precipitação, umidade, velocidade do vento, radiação solar e muitas outras.
+  * **Visualização de Dados Avançada:**
+      * **Tabelas Interativas:** Os dados são apresentados em tabelas dinâmicas com Grid.js, que oferecem pesquisa, paginação e ordenação.
+      * **Gráficos Dinâmicos:** Geração automática de gráficos de linha para cada variável climática selecionada utilizando a biblioteca ApexCharts.
+      * **Cards de Dados em Tempo Real:** Exibição clara e moderna das condições atuais, como temperatura, sensação térmica, umidade, vento, etc..
+  * **Dicionário de Dados Integrado:** Uma página dedicada que explica cada parâmetro climático disponível, incluindo seu código de API, descrição e unidades, carregado a partir de um arquivo JSON local.
+  * **Backend Robusto e Escalável:**
+      * Construído com Django e Django Rest Framework para criar endpoints de API eficientes que intermediam a comunicação entre o frontend e as APIs externas.
+      * Validação de dados de entrada nas requisições de API através de serializers, garantindo a integridade dos parâmetros enviados às fontes externas.
+  * **Design Moderno e Responsivo:** Interface de usuário limpa, intuitiva e adaptável a diferentes tamanhos de tela, com uma barra de navegação lateral para fácil acesso a todas as ferramentas.
 
-## Pré-requisitos
-* Python (versão 3.10 ou superior recomendada)
-* PIP (gestor de pacotes do Python)
-* Git (para clonar o repositório, opcional se descarregar o código de outra forma)
+## 🛠️ Tecnologias Utilizadas
 
-## Configuração e Instalação
+| Categoria      | Tecnologia/Biblioteca                                                                 |
+| :------------- | :------------------------------------------------------------------------------------ |
+| **Backend** | Python, Django, Django Rest Framework                                   |
+| **Frontend** | HTML5, CSS3, JavaScript (ES6+)                                                        |
+| **Bibliotecas JS** | ApexCharts (Gráficos), Grid.js (Tabelas Interativas)                    |
+| **APIs Externas**| Google Maps API (Maps, Places, Geocoding), NASA POWER, OpenWeatherMap |
+| **Banco de Dados** | SQLite (padrão do Django para desenvolvimento)                        |
+| **Dependências Python**| `requests`, `python-decouple`, `pandas`, `numpy`                    |
+
+## 📂 Estrutura do Projeto
+
+```
+climad/
+├── api/                         # App Django para a API REST
+│   ├── serializers.py           # Validação dos dados para as APIs externas
+│   ├── urls.py                  # URLs dos endpoints da API (/api/...)
+│   └── views.py                 # Lógica que busca dados da NASA e OpenWeather
+├── core/                        # App Django principal para as páginas
+│   ├── templates/               # Arquivos HTML (páginas da aplicação)
+│   ├── urls.py                  # URLs das páginas (/, /diaria, /horaria, etc.)
+│   └── views.py                 # Lógica de renderização das páginas
+├── climad/                      # Configurações do projeto Django
+│   ├── settings.py              # Configurações, chaves de API, apps instalados
+│   └── urls.py                  # URLs raiz do projeto
+├── static/                      # Arquivos estáticos
+│   ├── css/style.css            # Estilização da aplicação
+│   ├── js/                      # Lógica do frontend
+│   │   ├── main.js              # Manipulação do DOM, mapa, gráficos e tabelas
+│   │   └── api_client.js        # Funções para chamar a API interna do Climad
+│   └── data/
+│       └── data_dictionary.json # Descrição dos parâmetros climáticos
+├── .env.example                 # Exemplo de arquivo para variáveis de ambiente
+├── manage.py                    # Utilitário de linha de comando do Django
+└── requirements.txt             # Lista de dependências Python
+```
+
+## ⚙️ Configuração e Instalação
 
 Siga os passos abaixo para configurar e executar o projeto no seu ambiente local.
 
-**1. Clonar o Repositório (Exemplo)**
-   Se o seu projeto estiver no GitHub, clone-o. Caso contrário, descarregue os ficheiros para uma pasta no seu computador.
-   ```bash
-   git clone [https://github.com/joseferreira-dev/climad.git](https://github.com/joseferreira-dev/climad.git)
+**1. Pré-requisitos**
 
-   cd climad
-   ```
+  * Python (versão 3.10 ou superior)
+  * PIP (gerenciador de pacotes do Python)
+  * Git
 
-**2. Criar e Ativar um Ambiente Virtual**
-   É altamente recomendado usar um ambiente virtual para isolar as dependências do projeto.
-   ```bash
-   # Dentro da pasta do projeto (ex: climad/)
-   python -m venv venv
-   ```
-   Para ativar o ambiente virtual:
-   * No Windows (PowerShell):
-       ```powershell
-       .\venv\Scripts\Activate.ps1
-       ```
-       (Se encontrar um erro de política de execução, execute `Set-ExecutionPolicy RemoteSigned -Scope Process` no PowerShell e tente novamente.)
-   * No Windows (CMD):
-       ```cmd
-       .\venv\Scripts\activate.bat
-       ```
-   * No macOS/Linux:
-       ```bash
-       source venv/bin/activate
-       ```
-   O seu terminal deverá agora mostrar `(venv)` no início da linha.
+**2. Clonar o Repositório**
 
-**3. Instalar as Dependências**
-   Crie um ficheiro `requirements.txt` se ainda não o tiver, com o ambiente virtual ativo:
-   ```bash
-   pip freeze > requirements.txt
-   ```
-   Depois, para instalar (ou se já tiver o ficheiro):
-   ```bash
-   pip install -r requirements.txt
-   ```
-   As principais dependências que este projeto usa (e que estarão no `requirements.txt`) são:
-   * `django`
-   * `requests`
-   * `pandas`
-   * `python-decouple`
+```bash
+git clone https://github.com/joseferreira-dev/climad.git
+cd climad
+```
 
-**4. Configurar a Chave da API do Google Maps**
-   Este projeto usa a API do Google Maps para a funcionalidade de mapa interativo.
-   * **Obtenha uma Chave de API:**
-       1.  Aceda à [Google Cloud Console](https://console.cloud.google.com/).
-       2.  Crie um novo projeto ou selecione um existente.
-       3.  No menu de navegação, vá para "APIs e Serviços" > "Biblioteca".
-       4.  Procure e ative as seguintes APIs:
-           * **Maps JavaScript API**
-           * **Geocoding API**
-       5.  Em "APIs e Serviços" > "Credenciais", clique em "+ CRIAR CREDENCIAIS" e escolha "Chave de API".
-       6.  Copie a chave gerada.
-       7.  **IMPORTANTE:** Restrinja a sua chave de API para evitar uso não autorizado. Para desenvolvimento, em "Restrições de aplicativos", selecione "Referências de HTTP (sites da web)" e adicione `http://127.0.0.1:8000/*` às restrições de site.
+**3. Criar e Ativar um Ambiente Virtual**
+É altamente recomendado usar um ambiente virtual para isolar as dependências do projeto.
 
-   * **Crie o Ficheiro `.env`:**
-       Na raiz do seu projeto (mesma pasta que `manage.py`), crie um ficheiro chamado `.env`.
-       Adicione a sua chave de API a este ficheiro da seguinte forma:
-       ```env
-       MAPS_API_KEY=SUA_CHAVE_DE_API_COPIADA_AQUI
-       ```
+```bash
+# Windows (PowerShell)
+python -m venv venv
+.\venv\Scripts\Activate.ps1
 
-   * **Adicione `.env` ao `.gitignore`:**
-       Se ainda não o fez, crie um ficheiro `.gitignore` na raiz do projeto e adicione a linha `.env` para garantir que este ficheiro com a sua chave secreta nunca seja enviado para o Git.
-       ```
-       .env
-       venv/
-       db.sqlite3
-       __pycache__/
-       staticfiles/
-       ```
+# macOS/Linux
+python -m venv venv
+source venv/bin/activate
+```
 
-**5. Aplicar as Migrações do Django**
-   Para configurar a base de dados inicial do Django:
-   ```bash
-   python manage.py migrate
-   ```
+**4. Instalar as Dependências**
+Com o ambiente virtual ativo, instale todas as dependências listadas no `requirements.txt`.
 
-## Executando a Aplicação
+```bash
+pip install -r requirements.txt
+```
 
-1.  Com o ambiente virtual ativo e as dependências instaladas, inicie o servidor de desenvolvimento do Django:
+**5. Configurar as Variáveis de Ambiente**
+Este projeto precisa de chaves de API para funcionar.
+
+  * **Obtenha as Chaves de API:**
+
+    1.  **Google Maps API:** Acesse o [Google Cloud Console](https://console.cloud.google.com/), crie um projeto e ative as APIs `Maps JavaScript API` e `Geocoding API`. Gere uma chave de API.
+    2.  **OpenWeatherMap API:** Crie uma conta no [OpenWeatherMap](https://openweathermap.org/) e obtenha sua chave de API.
+    3.  **Django Secret Key:** Gere uma chave secreta aleatória. Você pode usar um gerador online ou o próprio Django.
+
+  * **Crie o arquivo `.env`:**
+    Na raiz do projeto (mesma pasta que `manage.py`), crie um arquivo chamado `.env` e adicione as chaves obtidas:
+
+    ```env
+    # Adicione a chave secreta do Django. Exemplo:
+    SECRET_KEY='django-insecure-your-random-secret-key-here'
+
+    # Adicione a sua chave de API do Google Maps
+    MAPS_API_KEY='SUA_CHAVE_DE_API_DO_Maps'
+
+    # Adicione a sua chave de API do OpenWeatherMap
+    OPENWEATHER_API_KEY='SUA_CHAVE_DE_API_DO_OPENWEATHERMAP'
+    ```
+
+  * **Adicione `.env` ao `.gitignore`:**
+    Certifique-se de que o arquivo `.gitignore` contém a linha `.env` para que suas chaves secretas não sejam enviadas para o repositório.
+
+**6. Aplicar as Migrações do Django**
+Para configurar o banco de dados inicial do Django:
+
+```bash
+python manage.py migrate
+```
+
+## 🚀 Executando a Aplicação
+
+1.  Com o ambiente virtual ativo, inicie o servidor de desenvolvimento do Django:
     ```bash
     python manage.py runserver
     ```
-2.  Abra o seu navegador e aceda a: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+2.  Abra o seu navegador e acesse: `http://127.0.0.1:8000/`
 
-A aplicação Climad deverá estar a funcionar!
+A aplicação Climad deverá estar funcionando\!
 
-## Estrutura do Projeto (Simplificada)
+## 🔮 Futuro do Projeto
 
-```
-climad/                     # Pasta raiz do projeto
-├── climad/                 # Pasta de configuração do projeto Django
-│   ├── settings.py         # Configurações do projeto (onde a API key é lida)
-│   ├── urls.py             # URLs principais do projeto
-│   └── ...
-├── core/                   # Aplicação principal "core"
-│   ├── views.py            # Lógica das páginas (onde os dados são processados)
-│   ├── urls.py             # URLs da aplicação "core"
-│   ├── templates/          # Pasta para os ficheiros HTML
-│   │   └── core/
-│   │       └── index.html  # Template principal da página
-│   └── ...
-├── static/                 # Pasta para ficheiros estáticos (CSS, JS, Imagens do projeto)
-│   ├── css/
-│   │   └── style.css
-│   └── js/
-│       └── main.js
-├── venv/                   # Pasta do ambiente virtual (geralmente ignorada pelo Git)
-├── .env                    # Ficheiro para variáveis de ambiente
-├── .gitignore              # Especifica ficheiros a serem ignorados pelo Git
-├── manage.py               # Utilitário de linha de comando do Django
-└── requirements.txt        # Lista de dependências Python
-```
-
-## Próximos Passos e Futuro do Projeto
-* Integração de mais fontes de dados climáticos (NOAA, ECMWF, INMET, Weather Underground).
-* Implementação de funcionalidades de Machine Learning para análise e previsão.
-* Criação de uma API para o Climad.
-* Desenvolvimento de novas páginas e funcionalidades conforme a pesquisa de mestrado avança.
-
----
+  * Integração de mais fontes de dados climáticos (ex: NOAA, ECMWF, INMET).
+  * Implementação de funcionalidades de Machine Learning para análise preditiva.
+  * Desenvolvimento de novas ferramentas de visualização, como mapas de calor.
+  * Criação de um sistema de contas de usuário para salvar análises e locais favoritos.
