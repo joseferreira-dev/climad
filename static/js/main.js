@@ -1,4 +1,4 @@
-// static/js/main.js (VERSÃO FINAL COM CORREÇÃO PARA O ERRO 'Assignment to constant variable')
+// static/js/main.js (VERSÃO COM MELHORIAS DE UX)
 
 // =================================================================
 // DICIONÁRIO DE TRADUÇÃO E UNIDADES
@@ -195,9 +195,46 @@ function displayRealTimeResults(data) {
 // PONTO DE ENTRADA DO JAVASCRIPT
 // =================================================================
 document.addEventListener('DOMContentLoaded', () => {
+
+    /**
+     * NOVO: Limita a quantidade de checkboxes de parâmetros que podem ser selecionados.
+     */
+    const handleCheckboxLimit = () => {
+        const checkboxGrid = document.querySelector('.checkbox-grid');
+        if (!checkboxGrid) return;
+
+        const checkboxes = checkboxGrid.querySelectorAll('input[name="parameters"]');
+        const maxAllowed = 10;
+
+        checkboxGrid.addEventListener('change', () => {
+            const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+            
+            if (checkedCount >= maxAllowed) {
+                // Desabilita todos os que não estão marcados
+                checkboxes.forEach(cb => {
+                    if (!cb.checked) {
+                        cb.disabled = true;
+                    }
+                });
+            } else {
+                // Habilita todos os checkboxes
+                checkboxes.forEach(cb => {
+                    cb.disabled = false;
+                });
+            }
+        });
+    };
+    
+    // Inicia a função de limite de checkboxes
+    handleCheckboxLimit();
+
+
     const handleFormSubmit = async (e, fetchFunction, isRealTime = false) => {
         e.preventDefault();
         const form = e.target;
+        const submitButton = form.querySelector('button[type="submit"]'); // NOVO
+        const originalButtonText = submitButton.innerHTML; // NOVO
+
         const errorDiv = form.querySelector('.form-error');
         const resultsDiv = document.querySelector('.results');
         errorDiv.style.display = 'none';
@@ -205,22 +242,30 @@ document.addEventListener('DOMContentLoaded', () => {
         
         let params = {};
         if (isRealTime) {
-            params = { lat: form.querySelector('#latitude-input').value, lon: form.querySelector('#longitude-input').value };
+            params = { 
+                lat: form.querySelector('#latitude-input').value, 
+                lon: form.querySelector('#longitude-input').value 
+            };
         } else {
+            const checkedParameters = Array.from(form.querySelectorAll('input[name="parameters"]:checked')).map(el => el.value);
+            if (checkedParameters.length === 0) {
+                errorDiv.textContent = 'Por favor, selecione pelo menos uma variável climática.';
+                errorDiv.style.display = 'block';
+                return;
+            }
             params = {
                 latitude: form.querySelector('#latitude-input').value,
                 longitude: form.querySelector('#longitude-input').value,
                 start_date: form.querySelector('#start-date-input').value,
                 end_date: form.querySelector('#end-date-input').value,
-                parameters: Array.from(form.querySelectorAll('input[name="parameters"]:checked')).map(el => el.value).join(',')
+                parameters: checkedParameters
             };
-            if (!params.parameters) {
-                errorDiv.textContent = 'Por favor, selecione pelo menos uma variável climática.';
-                errorDiv.style.display = 'block';
-                return;
-            }
         }
         
+        // NOVO: Adiciona o indicador de carregamento
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<span class="spinner-search"></span> Buscando...';
+
         try {
             const data = await fetchFunction(params);
             if (isRealTime) {
@@ -285,6 +330,10 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("Erro na chamada da API:", error);
             errorDiv.textContent = `Erro ao buscar dados: ${error.message}`;
             errorDiv.style.display = 'block';
+        } finally {
+            // NOVO: Garante que o botão volte ao normal, mesmo se houver erro
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButtonText;
         }
     };
 
