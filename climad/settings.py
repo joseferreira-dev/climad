@@ -138,3 +138,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MAPS_API_KEY = config("Maps_API_KEY")
 # Chave da API do OpenWeather lida a partir do ficheiro .env
 OPENWEATHER_API_KEY = config("OPENWEATHER_API_KEY")
+
+# Configuração do Google reCAPTCHA
+RECAPTCHA_SITE_KEY = config('RECAPTCHA_SITE_KEY')
+RECAPTCHA_SECRET_KEY = config('RECAPTCHA_SECRET_KEY')

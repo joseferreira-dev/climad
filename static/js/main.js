@@ -1,4 +1,4 @@
-// static/js/main.js (VERSÃO COM MELHORIAS DE UX)
+// static/js/main.js (VERSÃO COM reCAPTCHA)
 
 // =================================================================
 // DICIONÁRIO DE TRADUÇÃO E UNIDADES
@@ -196,9 +196,6 @@ function displayRealTimeResults(data) {
 // =================================================================
 document.addEventListener('DOMContentLoaded', () => {
 
-    /**
-     * NOVO: Limita a quantidade de checkboxes de parâmetros que podem ser selecionados.
-     */
     const handleCheckboxLimit = () => {
         const checkboxGrid = document.querySelector('.checkbox-grid');
         if (!checkboxGrid) return;
@@ -210,14 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
             
             if (checkedCount >= maxAllowed) {
-                // Desabilita todos os que não estão marcados
                 checkboxes.forEach(cb => {
                     if (!cb.checked) {
                         cb.disabled = true;
                     }
                 });
             } else {
-                // Habilita todos os checkboxes
                 checkboxes.forEach(cb => {
                     cb.disabled = false;
                 });
@@ -225,27 +220,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     
-    // Inicia a função de limite de checkboxes
     handleCheckboxLimit();
 
 
     const handleFormSubmit = async (e, fetchFunction, isRealTime = false) => {
         e.preventDefault();
         const form = e.target;
-        const submitButton = form.querySelector('button[type="submit"]'); // NOVO
-        const originalButtonText = submitButton.innerHTML; // NOVO
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerHTML;
 
         const errorDiv = form.querySelector('.form-error');
         const resultsDiv = document.querySelector('.results');
         errorDiv.style.display = 'none';
         resultsDiv.style.display = 'none';
         
-        let params = {};
+        // --- NOVO: Obtém o token do reCAPTCHA ---
+        const recaptchaToken = form.querySelector('[name="g-recaptcha-response"]').value;
+
+        let params = {
+            'g-recaptcha-response': recaptchaToken // Adiciona o token aos parâmetros
+        };
+
         if (isRealTime) {
-            params = { 
+            Object.assign(params, { 
                 lat: form.querySelector('#latitude-input').value, 
                 lon: form.querySelector('#longitude-input').value 
-            };
+            });
         } else {
             const checkedParameters = Array.from(form.querySelectorAll('input[name="parameters"]:checked')).map(el => el.value);
             if (checkedParameters.length === 0) {
@@ -253,16 +253,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 errorDiv.style.display = 'block';
                 return;
             }
-            params = {
+            Object.assign(params, {
                 latitude: form.querySelector('#latitude-input').value,
                 longitude: form.querySelector('#longitude-input').value,
                 start_date: form.querySelector('#start-date-input').value,
                 end_date: form.querySelector('#end-date-input').value,
                 parameters: checkedParameters
-            };
+            });
         }
         
-        // NOVO: Adiciona o indicador de carregamento
         submitButton.disabled = true;
         submitButton.innerHTML = '<span class="spinner-search"></span> Buscando...';
 
@@ -331,9 +330,12 @@ document.addEventListener('DOMContentLoaded', () => {
             errorDiv.textContent = `Erro ao buscar dados: ${error.message}`;
             errorDiv.style.display = 'block';
         } finally {
-            // NOVO: Garante que o botão volte ao normal, mesmo se houver erro
             submitButton.disabled = false;
             submitButton.innerHTML = originalButtonText;
+            // --- NOVO: Reseta o reCAPTCHA após a tentativa ---
+            if (typeof grecaptcha !== 'undefined') {
+                grecaptcha.reset();
+            }
         }
     };
 

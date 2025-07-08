@@ -41,5 +41,7 @@
     <script src="{% static "js/main.js" %}"></script>
     
     <script src="https://maps.googleapis.com/maps/api/js?key={{ maps_api_key }}&libraries=places&callback=initMap" async defer></script>
+
+    {% block extra_scripts %}{% endblock %}
 </body>
 </html>

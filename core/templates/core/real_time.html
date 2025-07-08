@@ -28,6 +28,9 @@
                 </div>
             </div>
         </fieldset>
+
+        <div class="g-recaptcha" data-sitekey="{{ RECAPTCHA_SITE_KEY }}"></div>
+
         <button type="submit" class="submit-button">Buscar Dados Atuais</button>
         <div class="form-error" style="display: none;"></div>
     </form>
@@ -35,4 +38,8 @@
     <div class="results" style="display: none;">
         </div>
 </div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 {% endblock %}

@@ -54,22 +54,26 @@
                 <label><input type="checkbox" name="parameters" value="TSOIL6"> Temp. do Solo (290-1000cm)</label>
             </div>
         </fieldset>
+
+        <div class="g-recaptcha" data-sitekey="{{ RECAPTCHA_SITE_KEY }}"></div>
+
         <button type="submit" class="submit-button">Buscar Dados Horários</button>
         <div class="form-error" style="display: none;"></div>
     </form>
     
     <div class="results" style="display: none;">
         <h2>Resultados da Análise</h2>
-        
         <div class="table-toggle-container">
             <button id="toggle-table-btn" class="button-secondary">Mostrar/Ocultar Tabela de Dados</button>
         </div>
-        
         <div id="table-container" style="display: none;">
             <div id="table-wrapper"></div>
         </div>
-        
         <div id="charts-container-apex" class="charts-wrapper-apex"></div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 {% endblock %}

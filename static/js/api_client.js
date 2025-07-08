@@ -1,25 +1,30 @@
 /**
  * Este arquivo lida com as chamadas à API e inclui uma função
- * para extrair mensagens de erro específicas das respostas do Django Rest Framework.
+ * para extrair mensagens de erro específicas, seja do CAPTCHA ou dos validadores do Django.
  */
 
 /**
  * Analisa a resposta de erro JSON do Django e extrai a primeira mensagem de erro legível.
+ * Agora é capaz de entender tanto erros de campo quanto erros genéricos (como o do CAPTCHA).
  * @param {object} errorData - O objeto JSON retornado pelo backend.
  * @returns {string} - A mensagem de erro extraída.
  */
 function parseDjangoError(errorData) {
-    // Se errorData for um objeto (o caso mais comum, ex: { "field": ["mensagem"] })
+    // Se errorData for um objeto (o caso mais comum)
     if (typeof errorData === 'object' && errorData !== null) {
-        // Pega a primeira chave do objeto (ex: "end_date" ou "parameters")
+        // Primeiro, verifica se existe uma chave "error" direta (como no erro do CAPTCHA)
+        if (errorData.error) {
+            return errorData.error;
+        }
+
+        // Se não houver, continua com a lógica para erros de validação de campo
         const firstKey = Object.keys(errorData)[0];
         if (firstKey && Array.isArray(errorData[firstKey]) && errorData[firstKey].length > 0) {
-            // Retorna a primeira mensagem de erro dentro do array
             return errorData[firstKey][0];
         }
     }
-
-    return "Ocorreu um erro de validação nos dados enviados.";
+    // Se o formato for totalmente inesperado, retorna uma mensagem genérica.
+    return "Ocorreu um erro desconhecido na validação dos dados.";
 }
 
 
