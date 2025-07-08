@@ -11,8 +11,16 @@
     <link rel="stylesheet" href="{% static "css/style.css" %}">
 </head>
 <body>
+    <button class="hamburger-btn" id="hamburger-btn" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <div id="sidebar-overlay"></div>
+
     <div class="page-wrapper">
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <a href="{% url 'core:home' %}" class="home-link">
                     <h1>CLIMAD</h1>
@@ -35,6 +43,7 @@
                 </div>
             </nav>
         </aside>
+
         <main class="main-content">
             {% block content %}
             {% endblock %}

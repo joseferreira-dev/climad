@@ -1,4 +1,4 @@
-// static/js/main.js (VERSÃO COM reCAPTCHA)
+// static/js/main.js (VERSÃO FINAL COM MENU HAMBÚRGUER)
 
 // =================================================================
 // DICIONÁRIO DE TRADUÇÃO E UNIDADES
@@ -196,6 +196,26 @@ function displayRealTimeResults(data) {
 // =================================================================
 document.addEventListener('DOMContentLoaded', () => {
 
+    const handleMobileMenu = () => {
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        if (hamburgerBtn && sidebar && overlay) {
+            hamburgerBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('is-open');
+                overlay.classList.toggle('is-active');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('is-open');
+                overlay.classList.remove('is-active');
+            });
+        }
+    };
+    handleMobileMenu();
+
+
     const handleCheckboxLimit = () => {
         const checkboxGrid = document.querySelector('.checkbox-grid');
         if (!checkboxGrid) return;
@@ -219,7 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
-    
     handleCheckboxLimit();
 
 
@@ -234,11 +253,10 @@ document.addEventListener('DOMContentLoaded', () => {
         errorDiv.style.display = 'none';
         resultsDiv.style.display = 'none';
         
-        // --- NOVO: Obtém o token do reCAPTCHA ---
         const recaptchaToken = form.querySelector('[name="g-recaptcha-response"]').value;
 
         let params = {
-            'g-recaptcha-response': recaptchaToken // Adiciona o token aos parâmetros
+            'g-recaptcha-response': recaptchaToken
         };
 
         if (isRealTime) {
@@ -332,7 +350,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } finally {
             submitButton.disabled = false;
             submitButton.innerHTML = originalButtonText;
-            // --- NOVO: Reseta o reCAPTCHA após a tentativa ---
             if (typeof grecaptcha !== 'undefined') {
                 grecaptcha.reset();
             }
