@@ -283,6 +283,7 @@ input[type="text"]:focus, input[type="date"]:focus {
   align-items: center;
   gap: 2em;
   background-color: var(--card-bg);
+  box-shadow: 0 4px 6px var(--shadow-color);
   padding: 3em;
   border-radius: 8px;
 }
@@ -290,30 +291,72 @@ input[type="text"]:focus, input[type="date"]:focus {
 .hero-title { font-size: 2.8rem; color: var(--cetene-blue-dark); }
 .hero-subtitle { font-size: 1.4rem; color: var(--cetene-blue-primary); }
 .hero-description { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2em; }
-.hero-image { max-width: 100%; border-radius: 8px; }
+.hero-image { min-width: 250px; max-width: 100%; border-radius: 8px; }
 
-.features-section { margin-top: 3em; }
+.features-section {
+  margin-top: 3em;
+  text-align: center;
+}
+
 .section-title { text-align: center; font-size: 2rem; color: var(--cetene-blue-dark); margin-bottom: 1.5em; }
 
 .hero-cards {
+  margin-top: 1.5em;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 2em;
 }
+
 .hero-card {
   background-color: var(--card-bg);
   padding: 2em;
   border-radius: 8px;
-  box-shadow: 0 4px 15px var(--shadow-color);
+  text-align: center;
+  box-shadow: 0 4px 6px var(--shadow-color);
   transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
 }
+
 .hero-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
+
 .card-icon { font-size: 2.5em; }
-.hero-card h3 { font-size: 1.4rem; color: var(--cetene-blue-dark); margin-top: 0.5em;}
-.card-link { font-weight: bold; }
+
+.hero-card h3 {
+  font-size: 1.3rem;
+  color: var(--cetene-blue-dark);
+  margin: 0.8em 0;
+}
+
+.hero-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex-grow: 1; 
+}
+
+.card-link {
+  display: inline-block;
+  margin-top: 1em;
+  padding: 0.6em 1.2em;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 6px;
+  background-color: var(--cetene-blue-light);
+  color: var(--cetene-blue-primary);
+  border: 2px solid var(--cetene-blue-primary);
+  transition: all 0.3s ease;
+}
+
+.card-link:hover, .card-link:focus {
+  background-color: var(--cetene-blue-primary);
+  color: var(--text-on-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
 
 .real-time-cards-grid {
   display: grid;
@@ -390,6 +433,21 @@ input[type="text"]:focus, input[type="date"]:focus {
     margin-left: 220px;
     width: calc(100% - 220px);
   }
+
+  .hero-section {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .hero-image-container {
+    width: 50%;
+    min-width: 250px;
+    max-width: 400px;
+  }
+
+  .hero-text {
+    text-align: center;
+  }
 }
 
 @media (max-width: 768px) {
@@ -420,4 +478,68 @@ input[type="text"]:focus, input[type="date"]:focus {
   .input-pair {
     grid-template-columns: 1fr;
   }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Estilos para a Página "Sobre"                                              */
+/* -------------------------------------------------------------------------- */
+
+.about-section {
+  margin-bottom: 2.5em;
+}
+
+.about-section h3 {
+  font-size: 1.5rem;
+  color: var(--cetene-blue-dark);
+  margin-bottom: 0.8em;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.4em;
+}
+
+.about-section p, .about-section li {
+  color: var(--text-secondary);
+  margin-bottom: 0.8em;
+  line-height: 1.7;
+}
+
+.about-section ul {
+  list-style-position: inside;
+  padding-left: 1em;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2em;
+}
+
+.team-member-card {
+  background-color: var(--cetene-blue-light);
+  padding: 2em;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.team-member-card h4 {
+  font-size: 1.3rem;
+  color: var(--cetene-blue-dark);
+}
+
+.team-member-card .role {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--cetene-blue-primary);
+  margin-top: 0.2em;
+  margin-bottom: 1em;
+}
+
+.team-links {
+  margin-top: 1.5em;
+  display: flex;
+  gap: 1em;
+}
+
+.team-links .button-secondary {
+  font-size: 0.9em;
+  padding: 0.6em 1.2em;
 }

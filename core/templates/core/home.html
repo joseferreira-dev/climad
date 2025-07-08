@@ -4,6 +4,9 @@
 {% block content %}
 <div class="container home-container">
     <div class="hero-section">
+        <div class="hero-image-container">
+            <img src="{% static 'images/logo-hero.png' %}" alt="Análise de Dados Climáticos" class="hero-image">
+        </div>
         <div class="hero-text">
             <h1 class="hero-title">CLIMAD</h1>
             <p class="hero-subtitle">Análise Climática Inteligente ao seu Alcance</p>
@@ -14,9 +17,6 @@
             <div class="hero-cta">
                 <a href="{% url 'core:daily' %}" class="button-primary">Começar Análise &rarr;</a>
             </div>
-        </div>
-        <div class="hero-image-container">
-            <img src="https://placehold.co/400x400" alt="Análise de Dados Climáticos" class="hero-image">
         </div>
     </div>
 

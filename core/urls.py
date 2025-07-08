@@ -9,4 +9,5 @@ urlpatterns = [
     path("diaria/", views.daily_view, name="daily"),
     path("horaria/", views.hourly_view, name="hourly"),
     path("tempo-real/", views.real_time_view, name="real_time"),
+    path("sobre/", views.about_view, name="about"),
 ]

@@ -1,0 +1,54 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h2>Sobre o Projeto CLIMAD</h2>
+    <p class="subtitle page-description">Informações sobre a plataforma, fontes de dados e equipe de desenvolvimento.</p>
+
+    <div class="about-section">
+        <h3>O Projeto</h3>
+        <p>
+            A plataforma Climad foi desenvolvida como parte de um projeto de pesquisa com o objetivo de fornecer acesso simplificado e visual a dados meteorológicos e climáticos de alta qualidade. A ferramenta permite que pesquisadores, estudantes e entusiastas do clima possam consultar, visualizar e analisar séries de dados históricos e em tempo real para qualquer localidade do globo.
+        </p>
+        <p>
+            Utilizando uma interface interativa com mapas e gráficos, o usuário pode selecionar variáveis específicas e obter análises detalhadas, facilitando estudos de caso, validação de modelos e a compreensão de padrões climáticos.
+        </p>
+    </div>
+
+    <div class="about-section">
+        <h3>Fonte dos Dados</h3>
+        <p>A plataforma integra dados de duas fontes principais, reconhecidas internacionalmente pela sua qualidade e abrangência:</p>
+        <ul>
+            <li><strong>NASA POWER (Prediction of Worldwide Energy Resources)</strong>: Fornece dados meteorológicos globais derivados de satélites e modelos de assimilação. É a fonte primária para os dados históricos diários e horários disponíveis na plataforma.</li>
+            <li><strong>OpenWeatherMap API</strong>: Utilizada para obter as condições meteorológicas atuais (tempo real), fornecendo uma visão instantânea do clima na localidade selecionada.</li>
+        </ul>
+    </div>
+
+    <div class="about-section">
+        <h3>Equipe</h3>
+        <div class="team-grid">
+            <div class="team-member-card">
+                <h4>José Ferreira Guedes Filho</h4>
+                <p class="role">Desenvolvedor</p>
+                <p>Mestrando do Programa de Pós-Graduação em Informática Aplicada</p>
+                <p>Universidade Federal Rural de Pernambuco</p>
+                <div class="team-links">
+                    <a href="https://github.com/joseferreira-dev/" target="_blank" class="button-secondary">GitHub</a>
+                    <a href="http://lattes.cnpq.br/0405234564365980" target="_blank" class="button-secondary">Lattes</a>
+                </div>
+            </div>
+            <div class="team-member-card">
+                <h4>Ricardo André Cavalcante de Souza</h4>
+                <p class="role">Orientador</p>
+                <p>Doutor em Ciências da Computação</p>
+                <p>Professor do Programa de Pós-Graduação em Informática Aplicada</p>
+                <p>Universidade Federal Rural de Pernambuco</p>
+                <div class="team-links">
+                    <a href="http://lattes.cnpq.br/7101881357139219" target="_blank" class="button-secondary">Lattes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
