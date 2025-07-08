@@ -11,28 +11,43 @@ class NasaPowerDailyAPIView(APIView):
     """
     def get(self, request, *args, **kwargs):
         serializer = NasaPowerSerializer(data=request.query_params)
-        if serializer.is_valid():
-            validated_data = serializer.validated_data
-            
-            api_url = "https://power.larc.nasa.gov/api/temporal/daily/point"
-            params = {
-                "latitude": validated_data["latitude"],
-                "longitude": validated_data["longitude"],
-                "start": validated_data["start_date"].strftime("%Y%m%d"),
-                "end": validated_data["end_date"].strftime("%Y%m%d"),
-                "parameters": validated_data["parameters"],
-                "community": "ag",
-                "format": "json",
-            }
-            
-            try:
-                response = requests.get(api_url, params=params)
-                response.raise_for_status()
-                return Response(response.json(), status=status.HTTP_200_OK)
-            except requests.exceptions.RequestException as e:
-                return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        validated_data = serializer.validated_data
         
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        api_url = "https://power.larc.nasa.gov/api/temporal/daily/point"
+        params = {
+            "latitude": validated_data["latitude"],
+            "longitude": validated_data["longitude"],
+            "start": validated_data["start_date"].strftime("%Y%m%d"),
+            "end": validated_data["end_date"].strftime("%Y%m%d"),
+            "parameters": validated_data["parameters"],
+            "community": "ag",
+            "format": "json",
+        }
+        
+        try:
+            response = requests.get(api_url, params=params, timeout=30)
+            response.raise_for_status()
+            return Response(response.json(), status=status.HTTP_200_OK)
+
+        except requests.exceptions.HTTPError:
+            return Response(
+                {"error": "O serviço externo retornou um erro. Verifique os parâmetros ou a disponibilidade do serviço."},
+                status=status.HTTP_502_BAD_GATEWAY
+            )
+        except requests.exceptions.RequestException:
+            return Response(
+                {"error": "Não foi possível conectar ao serviço de dados. Verifique sua conexão e tente novamente."},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE
+            )
+        except Exception:
+            return Response(
+                {"error": "Ocorreu um erro interno inesperado no servidor."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
 
 class NasaPowerHourlyAPIView(APIView):
     """
@@ -40,28 +55,42 @@ class NasaPowerHourlyAPIView(APIView):
     """
     def get(self, request, *args, **kwargs):
         serializer = NasaPowerSerializer(data=request.query_params)
-        if serializer.is_valid():
-            validated_data = serializer.validated_data
-            
-            api_url = "https://power.larc.nasa.gov/api/temporal/hourly/point"
-            params = {
-                "latitude": validated_data["latitude"],
-                "longitude": validated_data["longitude"],
-                "start": validated_data["start_date"].strftime("%Y%m%d"),
-                "end": validated_data["end_date"].strftime("%Y%m%d"),
-                "parameters": validated_data["parameters"],
-                "community": "ag",
-                "format": "json",
-            }
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-            try:
-                response = requests.get(api_url, params=params)
-                response.raise_for_status()
-                return Response(response.json(), status=status.HTTP_200_OK)
-            except requests.exceptions.RequestException as e:
-                return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        validated_data = serializer.validated_data
+        
+        api_url = "https://power.larc.nasa.gov/api/temporal/hourly/point"
+        params = {
+            "latitude": validated_data["latitude"],
+            "longitude": validated_data["longitude"],
+            "start": validated_data["start_date"].strftime("%Y%m%d"),
+            "end": validated_data["end_date"].strftime("%Y%m%d"),
+            "parameters": validated_data["parameters"],
+            "community": "ag",
+            "format": "json",
+        }
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            response = requests.get(api_url, params=params, timeout=30)
+            response.raise_for_status()
+            return Response(response.json(), status=status.HTTP_200_OK)
+
+        except requests.exceptions.HTTPError:
+            return Response(
+                {"error": "O serviço externo retornou um erro. Verifique os parâmetros ou a disponibilidade do serviço."},
+                status=status.HTTP_502_BAD_GATEWAY
+            )
+        except requests.exceptions.RequestException:
+            return Response(
+                {"error": "Não foi possível conectar ao serviço de dados. Verifique sua conexão e tente novamente."},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE
+            )
+        except Exception:
+            return Response(
+                {"error": "Ocorreu um erro interno inesperado no servidor."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
 
 class OpenWeatherRealTimeAPIView(APIView):
@@ -70,27 +99,44 @@ class OpenWeatherRealTimeAPIView(APIView):
     """
     def get(self, request, *args, **kwargs):
         serializer = OpenWeatherSerializer(data=request.query_params)
-        if serializer.is_valid():
-            validated_data = serializer.validated_data
-            
-            api_key = config("OPENWEATHER_API_KEY", default="")
-            if not api_key:
-                return Response({"error": "A chave da API do OpenWeather não foi configurada."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-            api_url = "https://api.openweathermap.org/data/2.5/weather"
-            params = {
-                "lat": validated_data["lat"],
-                "lon": validated_data["lon"],
-                "appid": api_key,
-                "units": "metric",
-                "lang": "pt_br",
-            }
+        validated_data = serializer.validated_data
+        
+        api_key = config("OPENWEATHER_API_KEY", default="")
+        if not api_key:
+            return Response(
+                {"error": "Ocorreu um erro de configuração no servidor."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
-            try:
-                response = requests.get(api_url, params=params)
-                response.raise_for_status()
-                return Response(response.json(), status=status.HTTP_200_OK)
-            except requests.exceptions.RequestException as e:
-                return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        api_url = "https://api.openweathermap.org/data/2.5/weather"
+        params = {
+            "lat": validated_data["lat"],
+            "lon": validated_data["lon"],
+            "appid": api_key,
+            "units": "metric",
+            "lang": "pt_br",
+        }
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            response = requests.get(api_url, params=params, timeout=15)
+            response.raise_for_status()
+            return Response(response.json(), status=status.HTTP_200_OK)
+
+        except requests.exceptions.HTTPError:
+            return Response(
+                {"error": "O serviço externo retornou um erro. Verifique os parâmetros ou a disponibilidade do serviço."},
+                status=status.HTTP_502_BAD_GATEWAY
+            )
+        except requests.exceptions.RequestException:
+            return Response(
+                {"error": "Não foi possível conectar ao serviço de dados. Verifique sua conexão e tente novamente."},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE
+            )
+        except Exception:
+            return Response(
+                {"error": "Ocorreu um erro interno inesperado no servidor."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
